@@ -1,0 +1,19 @@
+app:
+  load-data-on-start:
+    enabled: true
+    data-filename: /home/shimolin_ap@drsk.ru/skillbox/spring/news/src/main/resources/data.json
+
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost:5432/news_db
+    username: postgres
+    password: postgres
+    hikari:
+      schema: news_schema
+      connection-init-sql: CREATE SCHEMA IF NOT EXISTS news_schema
+      connection-timeout: 10000
+
+  jpa:
+    generate-ddl: true
+    hibernate:
+      ddl-auto: create

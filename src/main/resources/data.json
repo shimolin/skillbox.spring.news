@@ -1,0 +1,331 @@
+{
+  "users": [
+    {
+      "birthday" : "2000-01-01",
+      "id" : 1,
+      "first_name" : "Ivan",
+      "last_name" : "Ivanov"
+    },
+    {
+      "birthday" : "2001-02-02",
+      "id" : 2,
+      "first_name" : "Sergey",
+      "last_name" : "Sidorov"
+    },
+    {
+      "birthday" : "2002-03-03",
+      "id" : 3,
+      "first_name" : "Petr",
+      "last_name" : "Petrov"
+    },
+    {
+      "birthday" : "2003-03-03",
+      "id" : 4,
+      "first_name" : "Nikolay",
+      "last_name" : "Nikolaev"
+    },
+    {
+      "birthday" : "2004-04-04",
+      "id" : 5,
+      "first_name" : "Alexander",
+      "last_name" : "Alexandrov"
+    },
+    {
+      "birthday" : "2005-05-05",
+      "id" : 6,
+      "first_name" : "Igor",
+      "last_name" : "Igorev"
+    },
+    {
+      "birthday" : "2006-06-06",
+      "id" : 7,
+      "first_name" : "Victor",
+      "last_name" : "Victorov"
+    },
+    {
+      "birthday" : "2007-07-07",
+      "id" : 8,
+      "first_name" : "Ilya",
+      "last_name" : "Ilyushin"
+    },
+    {
+      "birthday" : "2008-08-08",
+      "id" : 9,
+      "first_name" : "Stepan",
+      "last_name" : "Stepanov"
+    },
+    {
+      "birthday" : "2009-09-09",
+      "id" : 10,
+      "first_name" : "Konstantin",
+      "last_name" : "Konstantinov"
+    }
+  ],
+  "news_categories": [
+    {
+      "id" : 1,
+      "name" : "Sport"
+    },
+    {
+      "id" : 2,
+      "name" : "Politic"
+    },
+    {
+      "id" : 3,
+      "name" : "Economy"
+    }
+  ],
+  "news": [
+    {
+      "category_id" : 1,
+      "created_at" : "2024-06-06T04:33:44.471Z",
+      "id" : 1,
+      "updated_at" : "2024-06-06T04:33:44.471Z",
+      "user_id" : 1,
+      "body" : " Some text....",
+      "title" : "News from user: FN 1 LN 1"
+    },
+    {
+      "category_id" : 1,
+      "created_at" : "2024-06-06T04:33:44.485Z",
+      "id" : 2,
+      "updated_at" : "2024-06-06T04:33:44.485Z",
+      "user_id" : 3,
+      "body" : " Some text....",
+      "title" : "News from user: FN 3 LN 3"
+    },
+    {
+      "category_id" : 3,
+      "created_at" : "2024-06-06T04:33:44.490Z",
+      "id" : 3,
+      "updated_at" : "2024-06-06T04:33:44.490Z",
+      "user_id" : 3,
+      "body" : " Some text....",
+      "title" : "News from user: FN 3 LN 3"
+    },
+    {
+      "category_id" : 1,
+      "created_at" : "2024-06-06T04:33:44.503Z",
+      "id" : 5,
+      "updated_at" : "2024-06-06T04:33:44.503Z",
+      "user_id" : 4,
+      "body" : " Some text....",
+      "title" : "News from user: FN 4 LN 4"
+    },
+    {
+      "category_id" : 1,
+      "created_at" : "2024-06-06T04:33:44.508Z",
+      "id" : 6,
+      "updated_at" : "2024-06-06T04:33:44.508Z",
+      "user_id" : 4,
+      "body" : " Some text....",
+      "title" : "News from user: FN 4 LN 4"
+    },
+    {
+      "category_id" : 1,
+      "created_at" : "2024-06-06T04:33:44.521Z",
+      "id" : 8,
+      "updated_at" : "2024-06-06T04:33:44.521Z",
+      "user_id" : 5,
+      "body" : " Some text....",
+      "title" : "News from user: FN 5 LN 5"
+    },
+    {
+      "category_id" : 2,
+      "created_at" : "2024-06-06T04:33:44.526Z",
+      "id" : 9,
+      "updated_at" : "2024-06-06T04:33:44.526Z",
+      "user_id" : 5,
+      "body" : " Some text....",
+      "title" : "News from user: FN 5 LN 5"
+    },
+    {
+      "category_id" : 3,
+      "created_at" : "2024-06-06T04:33:44.534Z",
+      "id" : 10,
+      "updated_at" : "2024-06-06T04:33:44.534Z",
+      "user_id" : 6,
+      "body" : " Some text....",
+      "title" : "News from user: FN 6 LN 6"
+    },
+    {
+      "category_id" : 2,
+      "created_at" : "2024-06-06T04:33:44.538Z",
+      "id" : 11,
+      "updated_at" : "2024-06-06T04:33:44.538Z",
+      "user_id" : 6,
+      "body" : " Some text....",
+      "title" : "News from user: FN 6 LN 6"
+    },
+    {
+      "category_id" : 2,
+      "created_at" : "2024-06-06T04:33:44.543Z",
+      "id" : 12,
+      "updated_at" : "2024-06-06T04:33:44.543Z",
+      "user_id" : 6,
+      "body" : " Some text....",
+      "title" : "News from user: FN 6 LN 6"
+    },
+    {
+      "category_id" : 2,
+      "created_at" : "2024-06-06T04:33:44.547Z",
+      "id" : 13,
+      "updated_at" : "2024-06-06T04:33:44.547Z",
+      "user_id" : 6,
+      "body" : " Some text....",
+      "title" : "News from user: FN 6 LN 6"
+    },
+    {
+      "category_id" : 3,
+      "created_at" : "2024-06-06T04:33:44.556Z",
+      "id" : 14,
+      "updated_at" : "2024-06-06T04:33:44.556Z",
+      "user_id" : 7,
+      "body" : " Some text....",
+      "title" : "News from user: FN 7 LN 7"
+    },
+    {
+      "category_id" : 2,
+      "created_at" : "2024-06-06T04:33:44.561Z",
+      "id" : 15,
+      "updated_at" : "2024-06-06T04:33:44.561Z",
+      "user_id" : 7,
+      "body" : " Some text....",
+      "title" : "News from user: FN 7 LN 7"
+    },
+    {
+      "category_id" : 3,
+      "created_at" : "2024-06-06T04:33:44.566Z",
+      "id" : 16,
+      "updated_at" : "2024-06-06T04:33:44.566Z",
+      "user_id" : 7,
+      "body" : " Some text....",
+      "title" : "News from user: FN 7 LN 7"
+    },
+    {
+      "category_id" : 2,
+      "created_at" : "2024-06-06T04:33:44.575Z",
+      "id" : 17,
+      "updated_at" : "2024-06-06T04:33:44.575Z",
+      "user_id" : 8,
+      "body" : " Some text....",
+      "title" : "News from user: FN 8 LN 8"
+    },
+    {
+      "category_id" : 1,
+      "created_at" : "2024-06-06T04:33:44.579Z",
+      "id" : 18,
+      "updated_at" : "2024-06-06T04:33:44.579Z",
+      "user_id" : 8,
+      "body" : " Some text....",
+      "title" : "News from user: FN 8 LN 8"
+    },
+    {
+      "category_id" : 2,
+      "created_at" : "2024-06-06T04:33:44.584Z",
+      "id" : 19,
+      "updated_at" : "2024-06-06T04:33:44.584Z",
+      "user_id" : 8,
+      "body" : " Some text....",
+      "title" : "News from user: FN 8 LN 8"
+    },
+    {
+      "category_id" : 1,
+      "created_at" : "2024-06-06T04:33:44.589Z",
+      "id" : 20,
+      "updated_at" : "2024-06-06T04:33:44.589Z",
+      "user_id" : 8,
+      "body" : " Some text....",
+      "title" : "News from user: FN 8 LN 8"
+    },
+    {
+      "category_id" : 2,
+      "created_at" : "2024-06-06T04:33:44.596Z",
+      "id" : 21,
+      "updated_at" : "2024-06-06T04:33:44.596Z",
+      "user_id" : 9,
+      "body" : " Some text....",
+      "title" : "News from user: FN 9 LN 9"
+    },
+    {
+      "category_id" : 2,
+      "created_at" : "2024-06-06T04:33:44.601Z",
+      "id" : 22,
+      "updated_at" : "2024-06-06T04:33:44.601Z",
+      "user_id" : 9,
+      "body" : " Some text....",
+      "title" : "News from user: FN 9 LN 9"
+    },
+    {
+      "category_id" : 2,
+      "created_at" : "2024-06-06T04:33:44.606Z",
+      "id" : 23,
+      "updated_at" : "2024-06-06T04:33:44.606Z",
+      "user_id" : 9,
+      "body" : " Some text....",
+      "title" : "News from user: FN 9 LN 9"
+    },
+    {
+      "category_id" : 1,
+      "created_at" : "2024-06-06T04:33:44.614Z",
+      "id" : 24,
+      "updated_at" : "2024-06-06T04:33:44.614Z",
+      "user_id" : 10,
+      "body" : " Some text....",
+      "title" : "News from user: FN 10 LN 10"
+    },
+    {
+      "category_id" : 3,
+      "created_at" : "2024-06-06T04:33:44.619Z",
+      "id" : 25,
+      "updated_at" : "2024-06-06T04:33:44.619Z",
+      "user_id" : 10,
+      "body" : " Some text....",
+      "title" : "News from user: FN 10 LN 10"
+    },
+    {
+      "category_id" : 3,
+      "created_at" : "2024-06-06T04:33:44.624Z",
+      "id" : 26,
+      "updated_at" : "2024-06-06T04:33:44.624Z",
+      "user_id" : 10,
+      "body" : " Some text....",
+      "title" : "News from user: FN 10 LN 10"
+    },
+    {
+      "category_id" : 3,
+      "created_at" : "2024-06-06T04:33:44.629Z",
+      "id" : 27,
+      "updated_at" : "2024-06-06T04:33:44.629Z",
+      "user_id" : 10,
+      "body" : " Some text....",
+      "title" : "News from user: FN 10 LN 10"
+    }
+  ],
+  "comments": [
+    {
+      "id" : 1,
+      "body" : " Some comment from user2 to news 7",
+      "created_at" : "2024-06-06T04:33:44.556Z",
+      "updated_at" : "2024-06-06T04:33:44.556Z",
+      "user_id" : 2,
+      "news_id" : 7
+    },
+    {
+      "id" : 2,
+      "body" : " Some comment from user 6 to news 1",
+      "created_at" : "2024-06-06T04:33:44.556Z",
+      "updated_at" : "2024-06-06T04:33:44.556Z",
+      "user_id" : 6,
+      "news_id" : 1
+    },
+    {
+      "id" : 3,
+      "body" : " Some comment from user 9 to news 20",
+      "created_at" : "2024-06-06T04:33:44.556Z",
+      "updated_at" : "2024-06-06T04:33:44.556Z",
+      "user_id" : 9,
+      "news_id" : 20
+    }
+  ]
+}
