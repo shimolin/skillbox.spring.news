@@ -19,6 +19,4 @@ public class NewsRequest {
 
     private Long categoryId;
 
-    private Long userId;
-
 }

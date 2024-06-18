@@ -9,14 +9,23 @@ import org.springframework.stereotype.Component;
 public class CommentMapper {
     public Comment requestToComment(CommentRequest request){
         Comment comment = new Comment();
-        comment.setBody(request.getBody());
+        if (request.getBody() != null) {
+            comment.setBody(request.getBody());
+        }
         return comment;
     }
 
     public CommentResponse commentToResponse(Comment comment){
+        if(comment == null){
+            return null;
+        }
         CommentResponse response = new CommentResponse();
         response.setId(comment.getId());
         response.setBody(comment.getBody());
+        response.setCreatedAt(comment.getCreatedAt());
+        response.setUpdatedAt(comment.getUpdatedAt());
+        response.setAuthorId(comment.getAuthor().getId());
+        response.setNewsId(comment.getNews().getId());
         return response;
 
     }

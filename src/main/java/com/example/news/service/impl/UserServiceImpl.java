@@ -43,13 +43,13 @@ public class UserServiceImpl implements UserService {
         existedUser.setFirstName(user.getFirstName());
         existedUser.setLastName(user.getLastName());
         existedUser.setBirthday(user.getBirthday());
-        existedUser.setNews(user.getNews());
-        existedUser.setComments(user.getComments());
         return userRepository.save(existedUser);
     }
 
     @Override
     public void deleteById(Long id) {
+        //todo не удалять user если у него есть news и/или comments
+        // или удалять news, comments а потом user
         userRepository.deleteById(id);
     }
 }

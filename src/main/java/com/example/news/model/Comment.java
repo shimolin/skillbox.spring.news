@@ -29,7 +29,7 @@ public class Comment {
     @ManyToOne
     @JoinColumn(name = "user_id")
     @ToString.Exclude
-    private User user;
+    private User author;
 
     @ManyToOne
     @JoinColumn(name = "news_id")

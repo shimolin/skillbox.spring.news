@@ -17,15 +17,11 @@ import java.time.Instant;
 @NoArgsConstructor
 public class NewsResponse {
     private Long id;
-
     private String title;
-
     private String body;
-
     private Instant createdAt;
-
+    private Instant updatedAt;
     private Long categoryId;
-
-    private Long userId;
+    private Long authorId;
 
 }

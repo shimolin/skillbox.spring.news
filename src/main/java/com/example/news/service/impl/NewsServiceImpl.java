@@ -1,8 +1,13 @@
 package com.example.news.service.impl;
 
+import com.example.news.aop.AuthorCheck;
+import com.example.news.aop.Loggable;
+import com.example.news.configuration.AppConfiguration;
 import com.example.news.model.News;
 import com.example.news.repository.NewsRepository;
+import com.example.news.repository.UserRepository;
 import com.example.news.service.NewsService;
+import com.example.news.service.UserService;
 import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -16,6 +21,8 @@ import java.util.List;
 public class NewsServiceImpl implements NewsService {
 
     private final NewsRepository newsRepository;
+    private final UserService userService;
+    private final AppConfiguration appConfiguration;
 
     @Override
     public List<News> findAll() {
@@ -33,10 +40,12 @@ public class NewsServiceImpl implements NewsService {
     public News create(News news) {
         news.setCreatedAt(Instant.now());
         news.setUpdatedAt(Instant.now());
+        news.setAuthor(userService.findById(appConfiguration.currentUserId));
         return newsRepository.save(news);
     }
 
     @Override
+    @AuthorCheck
     public News update(News news) {
         News existedNews = findById(news.getId());
         if (existedNews == null){
@@ -45,10 +54,12 @@ public class NewsServiceImpl implements NewsService {
         existedNews.setUpdatedAt(Instant.now());
         existedNews.setTitle(news.getTitle());
         existedNews.setBody(news.getBody());
+        existedNews.setCategory(news.getCategory());
         return newsRepository.save(existedNews);
     }
 
     @Override
+    @AuthorCheck
     public void deleteById(Long id) {
         newsRepository.deleteById(id);
     }

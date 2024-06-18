@@ -38,7 +38,7 @@ public class News {
     @ManyToOne
     @JoinColumn(name = "user_id")
     @ToString.Exclude
-    private User user;
+    private User author;
 
     @OneToMany(mappedBy = "news")
     @ToString.Exclude

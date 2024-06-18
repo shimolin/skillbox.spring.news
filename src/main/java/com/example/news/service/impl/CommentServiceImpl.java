@@ -1,5 +1,6 @@
 package com.example.news.service.impl;
 
+import com.example.news.aop.AuthorCheck;
 import com.example.news.model.Comment;
 import com.example.news.repository.CommentRepository;
 import com.example.news.service.CommentService;
@@ -37,6 +38,7 @@ public class CommentServiceImpl implements CommentService {
     }
 
     @Override
+    @AuthorCheck
     public Comment update(Comment comment) {
         Comment existedComment = findById(comment.getId());
         if (existedComment == null) {
@@ -48,6 +50,7 @@ public class CommentServiceImpl implements CommentService {
     }
 
     @Override
+    @AuthorCheck
     public void deleteById(Long id) {
         commentRepository.deleteById(id);
     }

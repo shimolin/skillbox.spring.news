@@ -308,7 +308,7 @@
       "body" : " Some comment from user2 to news 7",
       "created_at" : "2024-06-06T04:33:44.556Z",
       "updated_at" : "2024-06-06T04:33:44.556Z",
-      "user_id" : 2,
+      "user_id" : 4,
       "news_id" : 7
     },
     {

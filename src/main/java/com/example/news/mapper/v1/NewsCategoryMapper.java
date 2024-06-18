@@ -12,7 +12,9 @@ import org.springframework.stereotype.Component;
 public class NewsCategoryMapper {
     public NewsCategory requestToNewsCategory(NewsCategoryRequest request){
         NewsCategory newsCategory = new NewsCategory();
-        newsCategory.setName(request.getName());
+        if(request.getName() !=null){
+            newsCategory.setName(request.getName());
+        }
         return newsCategory;
     }
 

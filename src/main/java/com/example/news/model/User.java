@@ -26,11 +26,11 @@ public class User {
 
     private LocalDate birthday;
 
-    @OneToMany(mappedBy = "user")
+    @OneToMany(mappedBy = "author")
     @ToString.Exclude
     private List<News> news = new ArrayList<>();
 
-    @OneToMany(mappedBy = "user")
+    @OneToMany(mappedBy = "author")
     @ToString.Exclude
     private List<Comment> comments = new ArrayList<>();
 
