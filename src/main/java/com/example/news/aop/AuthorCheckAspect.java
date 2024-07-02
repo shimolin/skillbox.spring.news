@@ -1,6 +1,7 @@
 package com.example.news.aop;
 
 import com.example.news.configuration.AppConfiguration;
+import com.example.news.exception.NotPermitException;
 import com.example.news.service.CommentService;
 import com.example.news.service.NewsService;
 import jakarta.servlet.http.HttpServletRequest;
@@ -42,14 +43,16 @@ public class AuthorCheckAspect {
             default -> null;
         };
 
-        if (currentUserId.equals(authorId)) {
-            try {
-                return pjp.proceed();
-            } catch (Throwable e) {
-                throw new RuntimeException(e);
-            }
+        if (!currentUserId.equals(authorId)) {
+            throw new NotPermitException("Not Permitted!");
         }
-        return null;
+
+        try {
+            return pjp.proceed();
+        } catch (Throwable e) {
+            throw new RuntimeException(e);
+        }
+
     }
 
 

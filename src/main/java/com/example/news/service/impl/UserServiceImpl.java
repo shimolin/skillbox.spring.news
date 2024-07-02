@@ -58,19 +58,6 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public void deleteById(Long id) {
-        //todo не удалять user если у него есть news и/или comments
-        // или удалять news, comments а потом user
-//        List<News> ln = newsRepository.findNewsByUserId(id);
-//        List<Comment> lc = commentRepository.findCommentByUserId(id);
-//        for (Comment c : lc){
-//            commentRepository.deleteById(c.getId());
-//        }
-//        for (News n : ln){
-//            newsRepository.deleteById(n.getId());
-//        }
-//        commentRepository.deleteCommentByUserId(id);
-//        newsRepository.deleteNewsByUserId(id);
-
         userRepository.deleteById(id);
     }
 }
