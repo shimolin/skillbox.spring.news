@@ -3,7 +3,8 @@ package com.example.news.service.impl;
 import com.example.news.model.NewsCategory;
 import com.example.news.repository.NewsCategoryRepository;
 import com.example.news.service.NewsCategoryService;
-import jakarta.persistence.EntityNotFoundException;
+import com.example.news.exception.EntityNotFoundException;
+
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 

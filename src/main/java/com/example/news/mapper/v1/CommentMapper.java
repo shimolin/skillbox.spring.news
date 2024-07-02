@@ -24,7 +24,7 @@ public class CommentMapper {
         response.setBody(comment.getBody());
         response.setCreatedAt(comment.getCreatedAt());
         response.setUpdatedAt(comment.getUpdatedAt());
-        response.setAuthorId(comment.getAuthor().getId());
+        response.setUserId(comment.getUser().getId());
         response.setNewsId(comment.getNews().getId());
         return response;
 

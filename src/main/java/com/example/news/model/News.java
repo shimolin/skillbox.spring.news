@@ -38,9 +38,9 @@ public class News {
     @ManyToOne
     @JoinColumn(name = "user_id")
     @ToString.Exclude
-    private User author;
+    private User user;
 
-    @OneToMany(mappedBy = "news")
+    @OneToMany(mappedBy = "news", cascade = CascadeType.ALL)
     @ToString.Exclude
     @Builder.Default
     private List<Comment> comments = new ArrayList<>();

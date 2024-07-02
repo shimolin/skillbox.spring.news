@@ -36,9 +36,9 @@ public class AuthorCheckAspect {
 
         Long authorId = switch (pjp.getSignature().getDeclaringTypeName()) {
             case "com.example.news.service.impl.NewsServiceImpl" ->
-                    newsService.findById(pathVarId).getAuthor().getId();
+                    newsService.findById(pathVarId).getUser().getId();
             case "com.example.news.service.impl.CommentServiceImpl" ->
-                    commentService.findById(pathVarId).getAuthor().getId();
+                    commentService.findById(pathVarId).getUser().getId();
             default -> null;
         };
 

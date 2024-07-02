@@ -4,12 +4,13 @@ import com.example.news.aop.AuthorCheck;
 import com.example.news.model.Comment;
 import com.example.news.repository.CommentRepository;
 import com.example.news.service.CommentService;
-import jakarta.persistence.EntityNotFoundException;
+import com.example.news.exception.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.text.MessageFormat;
 import java.time.Instant;
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -53,5 +54,18 @@ public class CommentServiceImpl implements CommentService {
     @AuthorCheck
     public void deleteById(Long id) {
         commentRepository.deleteById(id);
+    }
+
+    @Override
+    public List<Comment> findByUserId(Long userId) {
+        List<Comment> comments;
+        comments = commentRepository.findCommentByUserId(userId);
+        return comments;
+
+    }
+
+    @Override
+    public void deleteByUserId(Long userId) {
+        commentRepository.deleteCommentByUserId(userId);
     }
 }

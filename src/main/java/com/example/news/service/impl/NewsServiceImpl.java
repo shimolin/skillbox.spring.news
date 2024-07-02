@@ -1,14 +1,12 @@
 package com.example.news.service.impl;
 
+import com.example.news.exception.EntityNotFoundException;
 import com.example.news.aop.AuthorCheck;
-import com.example.news.aop.Loggable;
 import com.example.news.configuration.AppConfiguration;
 import com.example.news.model.News;
 import com.example.news.repository.NewsRepository;
-import com.example.news.repository.UserRepository;
 import com.example.news.service.NewsService;
 import com.example.news.service.UserService;
-import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -40,7 +38,7 @@ public class NewsServiceImpl implements NewsService {
     public News create(News news) {
         news.setCreatedAt(Instant.now());
         news.setUpdatedAt(Instant.now());
-        news.setAuthor(userService.findById(appConfiguration.currentUserId));
+        news.setUser(userService.findById(appConfiguration.currentUserId));
         return newsRepository.save(news);
     }
 
@@ -62,5 +60,13 @@ public class NewsServiceImpl implements NewsService {
     @AuthorCheck
     public void deleteById(Long id) {
         newsRepository.deleteById(id);
+    }
+
+
+    @Override
+    public List<News> findNewsByUserId(Long id) {
+        List<News> news;
+        news = newsRepository.findNewsByUserId(id);
+        return news;
     }
 }

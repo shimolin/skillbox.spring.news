@@ -16,4 +16,5 @@ public interface NewsService {
 
     void deleteById(Long id);
 
+   List<News> findNewsByUserId(Long id);
 }

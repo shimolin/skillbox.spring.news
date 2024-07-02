@@ -1,6 +1,7 @@
 package com.example.news.web.controller;
 
 import com.example.news.aop.Loggable;
+import com.example.news.exception.EntityNotFoundException;
 import com.example.news.mapper.v1.UserMapper;
 import com.example.news.service.UserService;
 import com.example.news.web.model.UserRequest;
@@ -64,4 +65,5 @@ public class UserController {
     public void deleteById(@PathVariable Long id){
         userService.deleteById(id);
     }
+
 }

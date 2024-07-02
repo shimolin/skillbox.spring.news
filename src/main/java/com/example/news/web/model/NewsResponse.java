@@ -1,14 +1,8 @@
 package com.example.news.web.model;
 
-import com.example.news.model.NewsCategory;
-import com.example.news.model.User;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import lombok.ToString;
-import org.hibernate.annotations.CreationTimestamp;
 
 import java.time.Instant;
 
@@ -22,6 +16,6 @@ public class NewsResponse {
     private Instant createdAt;
     private Instant updatedAt;
     private Long categoryId;
-    private Long authorId;
+    private Long userId;
 
 }

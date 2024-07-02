@@ -11,6 +11,6 @@ public class CommentResponse {
     private Instant createdAt;
     private Instant updatedAt;
     private Long categoryId;
-    private Long authorId;
+    private Long userId;
     private Long newsId;
 }

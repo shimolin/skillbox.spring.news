@@ -19,7 +19,7 @@ public class NewsCategory {
 
     private String name;
 
-    @OneToMany(mappedBy = "category")
+    @OneToMany(mappedBy = "category", cascade = CascadeType.ALL)
     @ToString.Exclude
     @Builder.Default
     private List<News> news = new ArrayList<>();

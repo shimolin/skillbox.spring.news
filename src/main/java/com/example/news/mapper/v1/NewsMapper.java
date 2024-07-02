@@ -39,7 +39,7 @@ public class NewsMapper {
         response.setCreatedAt(news.getCreatedAt());
         response.setUpdatedAt(news.getUpdatedAt());
         response.setCategoryId(news.getCategory().getId());
-        response.setAuthorId(news.getAuthor().getId());
+        response.setUserId(news.getUser().getId());
         return response;
     }
 
