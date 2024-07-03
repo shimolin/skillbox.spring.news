@@ -1,10 +1,12 @@
 package com.example.news.web.controller;
 
 import com.example.news.mapper.v1.NewsMapper;
+import com.example.news.mapper.v2.NewsMapperV2;
 import com.example.news.model.News;
 import com.example.news.service.NewsService;
 import com.example.news.web.model.NewsRequest;
 import com.example.news.web.model.NewsResponse;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -21,7 +23,7 @@ import java.util.stream.Collectors;
 @RequiredArgsConstructor
 public class NewsController {
     private final NewsService newsService;
-    private final NewsMapper newsMapper;
+    private final NewsMapperV2 newsMapper;
 
     @GetMapping
     public ResponseEntity<List<NewsResponse>> findAll() {
@@ -41,7 +43,7 @@ public class NewsController {
     }
 
     @PostMapping
-    public ResponseEntity<NewsResponse> create(@RequestBody NewsRequest request) {
+    public ResponseEntity<NewsResponse> create(@RequestBody @Valid NewsRequest request) {
         return ResponseEntity.status(HttpStatus.CREATED)
                 .body(newsMapper.newsToResponse(
                         newsService.create(
@@ -51,7 +53,7 @@ public class NewsController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<NewsResponse> update(@PathVariable Long id, @RequestBody NewsRequest newsRequest){
+    public ResponseEntity<NewsResponse> update(@PathVariable Long id, @RequestBody @Valid NewsRequest newsRequest){
         return ResponseEntity.ok(
                 newsMapper.newsToResponse(
                         newsService.update(

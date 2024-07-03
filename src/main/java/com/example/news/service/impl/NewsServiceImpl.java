@@ -46,9 +46,6 @@ public class NewsServiceImpl implements NewsService {
     @AuthorCheck
     public News update(News news) {
         News existedNews = findById(news.getId());
-        if (existedNews == null){
-            throw new EntityNotFoundException(MessageFormat.format("News with id {0} not found!", news.getId()));
-        }
         existedNews.setUpdatedAt(Instant.now());
         existedNews.setTitle(news.getTitle());
         existedNews.setBody(news.getBody());

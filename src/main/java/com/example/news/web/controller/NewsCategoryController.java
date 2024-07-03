@@ -1,9 +1,11 @@
 package com.example.news.web.controller;
 
 import com.example.news.mapper.v1.NewsCategoryMapper;
+import com.example.news.mapper.v2.NewsCategoryMapperV2;
 import com.example.news.service.NewsCategoryService;
 import com.example.news.web.model.NewsCategoryRequest;
 import com.example.news.web.model.NewsCategoryResponse;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -17,7 +19,7 @@ import java.util.stream.Collectors;
 @RequiredArgsConstructor
 public class NewsCategoryController {
     private final NewsCategoryService newsCategoryService;
-    private final NewsCategoryMapper newsCategoryMapper;
+    private final NewsCategoryMapperV2 newsCategoryMapper;
 
     @GetMapping
     public ResponseEntity<List<NewsCategoryResponse>> findAll() {
@@ -34,7 +36,7 @@ public class NewsCategoryController {
     }
 
     @PostMapping
-    public ResponseEntity<NewsCategoryResponse> create(@RequestBody NewsCategoryRequest request) {
+    public ResponseEntity<NewsCategoryResponse> create(@RequestBody @Valid NewsCategoryRequest request) {
         return ResponseEntity.status(HttpStatus.CREATED)
                 .body(newsCategoryMapper.newsCategoryToResponse(
                         newsCategoryService.create(
@@ -44,7 +46,7 @@ public class NewsCategoryController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<NewsCategoryResponse> update(@PathVariable Long id, @RequestBody NewsCategoryRequest newsCategoryRequest){
+    public ResponseEntity<NewsCategoryResponse> update(@PathVariable Long id, @RequestBody @Valid NewsCategoryRequest newsCategoryRequest){
         return ResponseEntity.ok(
                 newsCategoryMapper.newsCategoryToResponse(
                         newsCategoryService.update(

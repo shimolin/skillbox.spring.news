@@ -18,6 +18,7 @@ public class Comment {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Column(nullable = false)
     private String body;
 
     @CreationTimestamp
@@ -27,12 +28,12 @@ public class Comment {
     private Instant updatedAt;
 
     @ManyToOne
-    @JoinColumn(name = "user_id")
+    @JoinColumn(name = "user_id", nullable = false)
     @ToString.Exclude
     private User user;
 
     @ManyToOne
-    @JoinColumn(name = "news_id")
+    @JoinColumn(name = "news_id", nullable = false)
     @ToString.Exclude
     private News news;
 

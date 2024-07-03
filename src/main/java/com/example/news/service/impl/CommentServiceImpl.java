@@ -47,9 +47,9 @@ public class CommentServiceImpl implements CommentService {
     @AuthorCheck
     public Comment update(Comment comment) {
         Comment existedComment = findById(comment.getId());
-        if (existedComment == null) {
-            throw new EntityNotFoundException(MessageFormat.format("Comment with id {0} not found!", comment.getId()));
-        }
+//        if (existedComment == null) {
+//            throw new EntityNotFoundException(MessageFormat.format("Comment with id {0} not found!", comment.getId()));
+//        }
         existedComment.setBody(comment.getBody());
         existedComment.setUpdatedAt(Instant.now());
         return commentRepository.save(existedComment);

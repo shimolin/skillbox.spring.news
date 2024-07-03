@@ -10,7 +10,6 @@ public class CommentResponse {
     private String body;
     private Instant createdAt;
     private Instant updatedAt;
-    private Long categoryId;
     private Long userId;
     private Long newsId;
 }

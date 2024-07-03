@@ -3,9 +3,11 @@ package com.example.news.web.controller;
 import com.example.news.aop.Loggable;
 import com.example.news.exception.EntityNotFoundException;
 import com.example.news.mapper.v1.UserMapper;
+import com.example.news.mapper.v2.UserMapperV2;
 import com.example.news.service.UserService;
 import com.example.news.web.model.UserRequest;
 import com.example.news.web.model.UserResponse;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -20,7 +22,7 @@ import java.util.stream.Collectors;
 public class UserController {
 
     private final UserService userService;
-    private final UserMapper userMapper;
+    private final UserMapperV2 userMapper;
 
     @GetMapping
     public ResponseEntity<List<UserResponse>> findAll(){
@@ -41,7 +43,7 @@ public class UserController {
     }
 
     @PostMapping()
-    public ResponseEntity<UserResponse> create(@RequestBody UserRequest userRequest){
+    public ResponseEntity<UserResponse> create(@RequestBody @Valid UserRequest userRequest){
         return ResponseEntity.status(HttpStatus.CREATED)
                 .body(userMapper.userToResponse(
                         userService.create(
@@ -51,7 +53,7 @@ public class UserController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<UserResponse> update(@PathVariable Long id, @RequestBody UserRequest userRequest){
+    public ResponseEntity<UserResponse> update(@PathVariable Long id, @RequestBody @Valid UserRequest userRequest){
         return ResponseEntity.ok(
                 userMapper.userToResponse(
                         userService.update(

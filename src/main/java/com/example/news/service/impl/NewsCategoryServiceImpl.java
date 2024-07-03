@@ -37,9 +37,9 @@ public class NewsCategoryServiceImpl implements NewsCategoryService {
     @Override
     public NewsCategory update(NewsCategory newsCategory) {
         NewsCategory existedCategory = findById(newsCategory.getId());
-        if(existedCategory == null){
-            throw new EntityNotFoundException(MessageFormat.format("NewsCategory with id {0} not found!", newsCategory.getId()));
-        }
+//        if(existedCategory == null){
+//            throw new EntityNotFoundException(MessageFormat.format("NewsCategory with id {0} not found!", newsCategory.getId()));
+//        }
         existedCategory.setName(newsCategory.getName());
         return newsCategoryRepository.save(existedCategory);
     }
