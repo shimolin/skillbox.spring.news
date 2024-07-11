@@ -4,6 +4,7 @@ import com.example.news.mapper.v1.NewsMapper;
 import com.example.news.mapper.v2.NewsMapperV2;
 import com.example.news.model.News;
 import com.example.news.service.NewsService;
+import com.example.news.web.model.NewsFilter;
 import com.example.news.web.model.NewsRequest;
 import com.example.news.web.model.NewsResponse;
 import jakarta.validation.Valid;
@@ -24,6 +25,18 @@ import java.util.stream.Collectors;
 public class NewsController {
     private final NewsService newsService;
     private final NewsMapperV2 newsMapper;
+
+    @GetMapping("/filter")
+    public ResponseEntity<List<NewsResponse>> filterBy(@RequestParam(value = "userid", required = false) Long userId, @RequestParam(value = "categoryid", required = false) Long categoryId){
+        NewsFilter filter = new NewsFilter();
+        filter.setUserId(userId);
+        filter.setCategoryId(categoryId);
+        return ResponseEntity.ok(
+                newsService.filterBy(filter).stream()
+                        .map(newsMapper::newsToResponse)
+                        .collect(Collectors.toList())
+        );
+    }
 
     @GetMapping
     public ResponseEntity<List<NewsResponse>> findAll() {

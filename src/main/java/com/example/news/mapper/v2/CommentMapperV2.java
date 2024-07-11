@@ -13,5 +13,5 @@ public interface CommentMapperV2 {
     Comment requestToComment(CommentRequest request);
     @Mapping(source = "user.id", target = "userId")
     @Mapping(source = "news.id", target = "newsId")
- CommentResponse commentToResponse(Comment comment);
+    CommentResponse commentToResponse(Comment comment);
 }

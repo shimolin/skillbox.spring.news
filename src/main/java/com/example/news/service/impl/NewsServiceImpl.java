@@ -1,12 +1,13 @@
 package com.example.news.service.impl;
 
-import com.example.news.exception.EntityNotFoundException;
 import com.example.news.aop.AuthorCheck;
 import com.example.news.configuration.AppConfiguration;
+import com.example.news.exception.EntityNotFoundException;
 import com.example.news.model.News;
 import com.example.news.repository.NewsRepository;
 import com.example.news.service.NewsService;
 import com.example.news.service.UserService;
+import com.example.news.web.model.NewsFilter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -21,6 +22,15 @@ public class NewsServiceImpl implements NewsService {
     private final NewsRepository newsRepository;
     private final UserService userService;
     private final AppConfiguration appConfiguration;
+
+    @Override
+    public List<News> filterBy(NewsFilter filter) {
+        if(filter.getUserId() == null && filter.getCategoryId() != null)
+            return newsRepository.findAllByCategoryId(filter.getCategoryId());
+        if(filter.getUserId() != null && filter.getCategoryId() == null)
+            return newsRepository.findAllByUserId(filter.getUserId());
+        return newsRepository.findAllByUserIdAndCategoryId(filter.getUserId(), filter.getCategoryId());
+    }
 
     @Override
     public List<News> findAll() {
@@ -60,10 +70,10 @@ public class NewsServiceImpl implements NewsService {
     }
 
 
-    @Override
-    public List<News> findNewsByUserId(Long id) {
-        List<News> news;
-        news = newsRepository.findNewsByUserId(id);
-        return news;
-    }
+//    @Override
+//    public List<News> findNewsByUserId(Long id) {
+//        List<News> news;
+//        news = newsRepository.findAllByUserId(id);
+//        return news;
+//    }
 }
