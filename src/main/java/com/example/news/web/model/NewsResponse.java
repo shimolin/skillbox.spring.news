@@ -17,4 +17,5 @@ public class NewsResponse {
     private Instant updatedAt;
     private Long categoryId;
     private Long userId;
+    private Integer commentCount;
 }

@@ -1,23 +1,17 @@
 package com.example.news.web.controller;
 
-import com.example.news.mapper.v1.NewsMapper;
 import com.example.news.mapper.v2.NewsMapperV2;
-import com.example.news.model.News;
+import com.example.news.service.CommentService;
 import com.example.news.service.NewsService;
-import com.example.news.web.model.NewsFilter;
-import com.example.news.web.model.NewsRequest;
-import com.example.news.web.model.NewsResponse;
-import com.example.news.web.model.PageFilter;
+import com.example.news.web.model.*;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.time.Instant;
-import java.time.LocalDateTime;
-import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.atomic.AtomicReference;
 import java.util.stream.Collectors;
 
 @RestController
@@ -25,15 +19,19 @@ import java.util.stream.Collectors;
 @RequiredArgsConstructor
 public class NewsController {
     private final NewsService newsService;
+    private final CommentService commentService;
     private final NewsMapperV2 newsMapper;
 
     @GetMapping("/filter")
     public ResponseEntity<List<NewsResponse>> filterBy(NewsFilter filter) {
         return ResponseEntity.ok(
-                newsService.filterBy(filter).stream()
-                        .map(newsMapper::newsToResponse)
-                        .collect(Collectors.toList())
-        );
+                newsService.filterBy(filter).stream().map(
+                        (news -> {
+                            NewsResponse response = newsMapper.newsToResponse(news);
+                            response.setCommentCount(commentService.getCommentCountByNewsId(news.getId()));
+                            return response;
+                        })
+                ).collect(Collectors.toList()));
     }
 
     @GetMapping
