@@ -3,6 +3,7 @@ package com.example.news.web.controller;
 import com.example.news.mapper.v1.CommentMapper;
 import com.example.news.mapper.v2.CommentMapperV2;
 import com.example.news.service.CommentService;
+import com.example.news.web.model.CommentFilter;
 import com.example.news.web.model.CommentRequest;
 import com.example.news.web.model.CommentResponse;
 import jakarta.validation.Valid;
@@ -20,21 +21,29 @@ public class CommentController {
     private final CommentService commentService;
     private final CommentMapperV2 commentMapper;
 
-    @GetMapping
-    public ResponseEntity<List<CommentResponse>> findAll() {
-        return ResponseEntity.ok(
-                commentService.findAll().stream()
-                        .map(commentMapper::commentToResponse)
-                        .collect(Collectors.toList()));
-    }
+//    @GetMapping
+//    public ResponseEntity<List<CommentResponse>> findAll() {
+//        return ResponseEntity.ok(
+//                commentService.findAll().stream()
+//                        .map(commentMapper::commentToResponse)
+//                        .collect(Collectors.toList()));
+//    }
 
-    @GetMapping("/{id}")
-    public ResponseEntity<CommentResponse> findById(@PathVariable Long id) {
-        return ResponseEntity.ok(
-                commentMapper.commentToResponse(
-                        commentService.findById(id)
-                )
-        );
+//    @GetMapping("/{id}")
+//    public ResponseEntity<CommentResponse> findById(@PathVariable Long id) {
+//        return ResponseEntity.ok(
+//                commentMapper.commentToResponse(
+//                        commentService.findById(id)
+//                )
+//        );
+//    }
+
+    @GetMapping()
+    public ResponseEntity<List<CommentResponse>> findByNewsId(CommentFilter filter){
+        return ResponseEntity.ok(commentService.findByNewsId(filter)
+                .stream()
+                .map(commentMapper::commentToResponse)
+                .collect(Collectors.toList()));
     }
 
     @PostMapping

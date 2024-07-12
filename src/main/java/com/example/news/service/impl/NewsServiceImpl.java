@@ -8,7 +8,9 @@ import com.example.news.repository.NewsRepository;
 import com.example.news.service.NewsService;
 import com.example.news.service.UserService;
 import com.example.news.web.model.NewsFilter;
+import com.example.news.web.model.PageFilter;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
 import java.text.MessageFormat;
@@ -25,16 +27,23 @@ public class NewsServiceImpl implements NewsService {
 
     @Override
     public List<News> filterBy(NewsFilter filter) {
-        if(filter.getUserId() == null && filter.getCategoryId() != null)
+        if (filter.getUserId() == null && filter.getCategoryId() != null)
             return newsRepository.findAllByCategoryId(filter.getCategoryId());
-        if(filter.getUserId() != null && filter.getCategoryId() == null)
+
+        if (filter.getUserId() != null && filter.getCategoryId() == null)
             return newsRepository.findAllByUserId(filter.getUserId());
+
         return newsRepository.findAllByUserIdAndCategoryId(filter.getUserId(), filter.getCategoryId());
     }
 
     @Override
-    public List<News> findAll() {
-        return newsRepository.findAll();
+    public List<News> findAll(PageFilter filter) {
+        if (filter.getPageSize() == null) filter.setPageSize(1000);
+        if (filter.getPageNumber() == null) filter.setPageNumber(0);
+
+        return newsRepository.findAll(
+                PageRequest.of(filter.getPageNumber(), filter.getPageSize())
+        ).getContent();
     }
 
     @Override
@@ -69,11 +78,4 @@ public class NewsServiceImpl implements NewsService {
         newsRepository.deleteById(id);
     }
 
-
-//    @Override
-//    public List<News> findNewsByUserId(Long id) {
-//        List<News> news;
-//        news = newsRepository.findAllByUserId(id);
-//        return news;
-//    }
 }

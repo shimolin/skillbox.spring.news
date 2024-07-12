@@ -7,6 +7,7 @@ import com.example.news.service.NewsService;
 import com.example.news.web.model.NewsFilter;
 import com.example.news.web.model.NewsRequest;
 import com.example.news.web.model.NewsResponse;
+import com.example.news.web.model.PageFilter;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -27,10 +28,7 @@ public class NewsController {
     private final NewsMapperV2 newsMapper;
 
     @GetMapping("/filter")
-    public ResponseEntity<List<NewsResponse>> filterBy(@RequestParam(value = "userid", required = false) Long userId, @RequestParam(value = "categoryid", required = false) Long categoryId){
-        NewsFilter filter = new NewsFilter();
-        filter.setUserId(userId);
-        filter.setCategoryId(categoryId);
+    public ResponseEntity<List<NewsResponse>> filterBy(NewsFilter filter) {
         return ResponseEntity.ok(
                 newsService.filterBy(filter).stream()
                         .map(newsMapper::newsToResponse)
@@ -39,9 +37,9 @@ public class NewsController {
     }
 
     @GetMapping
-    public ResponseEntity<List<NewsResponse>> findAll() {
+    public ResponseEntity<List<NewsResponse>> findAll(PageFilter filter) {
         return ResponseEntity.ok(
-                newsService.findAll().stream()
+                newsService.findAll(filter).stream()
                         .map(newsMapper::newsToResponse)
                         .collect(Collectors.toList()));
     }
@@ -66,7 +64,7 @@ public class NewsController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<NewsResponse> update(@PathVariable Long id, @RequestBody @Valid NewsRequest newsRequest){
+    public ResponseEntity<NewsResponse> update(@PathVariable Long id, @RequestBody @Valid NewsRequest newsRequest) {
         return ResponseEntity.ok(
                 newsMapper.newsToResponse(
                         newsService.update(
@@ -77,7 +75,7 @@ public class NewsController {
     }
 
     @DeleteMapping("/{id}")
-    public void delete(@PathVariable Long id){
+    public void delete(@PathVariable Long id) {
         newsService.deleteById(id);
     }
 

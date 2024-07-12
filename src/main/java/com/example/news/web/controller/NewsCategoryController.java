@@ -1,10 +1,10 @@
 package com.example.news.web.controller;
 
-import com.example.news.mapper.v1.NewsCategoryMapper;
 import com.example.news.mapper.v2.NewsCategoryMapperV2;
 import com.example.news.service.NewsCategoryService;
 import com.example.news.web.model.NewsCategoryRequest;
 import com.example.news.web.model.NewsCategoryResponse;
+import com.example.news.web.model.PageFilter;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -22,9 +22,9 @@ public class NewsCategoryController {
     private final NewsCategoryMapperV2 newsCategoryMapper;
 
     @GetMapping
-    public ResponseEntity<List<NewsCategoryResponse>> findAll() {
+    public ResponseEntity<List<NewsCategoryResponse>> findAll(PageFilter filter) {
         return ResponseEntity.ok(
-                newsCategoryService.findAll().stream()
+                newsCategoryService.findAll(filter).stream()
                         .map(newsCategoryMapper::newsCategoryToResponse)
                         .collect(Collectors.toList()));
     }

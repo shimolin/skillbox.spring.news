@@ -2,11 +2,12 @@ package com.example.news.service;
 
 import com.example.news.model.News;
 import com.example.news.model.NewsCategory;
+import com.example.news.web.model.PageFilter;
 
 import java.util.List;
 
 public interface NewsCategoryService {
-    List<NewsCategory> findAll();
+    List<NewsCategory> findAll(PageFilter filter);
 
     NewsCategory findById(Long id);
 

@@ -7,6 +7,7 @@ import com.example.news.repository.CommentRepository;
 import com.example.news.service.CommentService;
 import com.example.news.exception.EntityNotFoundException;
 import com.example.news.service.UserService;
+import com.example.news.web.model.CommentFilter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -33,6 +34,11 @@ public class CommentServiceImpl implements CommentService {
         return commentRepository.findById(id).orElseThrow(
                 () -> new EntityNotFoundException(MessageFormat.format("Comment with id {0} not found!", id))
         );
+    }
+
+    @Override
+    public List<Comment> findByNewsId(CommentFilter filter) {
+        return commentRepository.findByNewsId(filter.getNewsId());
     }
 
     @Override

@@ -5,7 +5,9 @@ import com.example.news.repository.NewsCategoryRepository;
 import com.example.news.service.NewsCategoryService;
 import com.example.news.exception.EntityNotFoundException;
 
+import com.example.news.web.model.PageFilter;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
 import java.text.MessageFormat;
@@ -17,10 +19,11 @@ public class NewsCategoryServiceImpl implements NewsCategoryService {
 
     private final NewsCategoryRepository newsCategoryRepository;
 
-
     @Override
-    public List<NewsCategory> findAll() {
-        return newsCategoryRepository.findAll();
+    public List<NewsCategory> findAll(PageFilter filter) {
+        return newsCategoryRepository.findAll(
+                PageRequest.of(filter.getPageNumber(), filter.getPageSize())
+        ).getContent();
     }
 
     @Override

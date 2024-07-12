@@ -5,6 +5,7 @@ import com.example.news.exception.EntityNotFoundException;
 import com.example.news.mapper.v1.UserMapper;
 import com.example.news.mapper.v2.UserMapperV2;
 import com.example.news.service.UserService;
+import com.example.news.web.model.PageFilter;
 import com.example.news.web.model.UserRequest;
 import com.example.news.web.model.UserResponse;
 import jakarta.validation.Valid;
@@ -25,9 +26,9 @@ public class UserController {
     private final UserMapperV2 userMapper;
 
     @GetMapping
-    public ResponseEntity<List<UserResponse>> findAll(){
+    public ResponseEntity<List<UserResponse>> findAll(PageFilter filter){
         return ResponseEntity.ok(
-                userService.findAll().stream()
+                userService.findAll(filter).stream()
                         .map(userMapper::userToResponse)
                         .collect(Collectors.toList())
         );
