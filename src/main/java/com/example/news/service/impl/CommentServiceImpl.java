@@ -3,6 +3,7 @@ package com.example.news.service.impl;
 import com.example.news.aop.AuthorCheck;
 import com.example.news.configuration.AppConfiguration;
 import com.example.news.model.Comment;
+import com.example.news.model.News;
 import com.example.news.repository.CommentRepository;
 import com.example.news.service.CommentService;
 import com.example.news.exception.EntityNotFoundException;
@@ -23,6 +24,12 @@ public class CommentServiceImpl implements CommentService {
     private final CommentRepository commentRepository;
     private final UserService userService;
     private final AppConfiguration appConfiguration;
+
+
+    @Override
+    public Integer getCommentCountByNewsId(Long newsId) {
+        return commentRepository.getCommentsCountByNewsId(newsId);
+    }
 
     @Override
     public List<Comment> findAll() {
@@ -67,16 +74,4 @@ public class CommentServiceImpl implements CommentService {
         commentRepository.deleteById(id);
     }
 
-    @Override
-    public List<Comment> findByUserId(Long userId) {
-        List<Comment> comments;
-        comments = commentRepository.findCommentByUserId(userId);
-        return comments;
-
-    }
-
-    @Override
-    public void deleteByUserId(Long userId) {
-        commentRepository.deleteCommentByUserId(userId);
-    }
 }

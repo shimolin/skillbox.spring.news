@@ -1,6 +1,7 @@
 package com.example.news.service;
 
 import com.example.news.model.Comment;
+import com.example.news.model.News;
 import com.example.news.web.model.CommentFilter;
 
 import java.util.List;
@@ -18,7 +19,6 @@ public interface CommentService {
 
     List<Comment> findByNewsId(CommentFilter filter);
 
-    List<Comment> findByUserId(Long userId);
+    Integer getCommentCountByNewsId(Long newsId);
 
-    void deleteByUserId(Long userId);
 }
