@@ -5,6 +5,7 @@ import com.example.news.configuration.AppConfiguration;
 import com.example.news.exception.EntityNotFoundException;
 import com.example.news.model.News;
 import com.example.news.repository.NewsRepository;
+import com.example.news.service.CommentService;
 import com.example.news.service.NewsService;
 import com.example.news.service.UserService;
 import com.example.news.web.model.NewsFilter;
@@ -23,17 +24,24 @@ public class NewsServiceImpl implements NewsService {
 
     private final NewsRepository newsRepository;
     private final UserService userService;
+    private final CommentService commentService;
     private final AppConfiguration appConfiguration;
 
     @Override
     public List<News> filterBy(NewsFilter filter) {
-        if (filter.getUserId() == null && filter.getCategoryId() != null)
-            return newsRepository.findAllByCategoryId(filter.getCategoryId());
+        List<News> newsList;
+        if (filter.getUserId() == null && filter.getCategoryId() != null) {
+            newsList = newsRepository.findAllByCategoryId(filter.getCategoryId());
+        } else if (filter.getUserId() != null && filter.getCategoryId() == null) {
+            newsList = newsRepository.findAllByUserId(filter.getUserId());
+        } else {
+            newsList = newsRepository.findAllByUserIdAndCategoryId(filter.getUserId(), filter.getCategoryId());
+        }
 
-        if (filter.getUserId() != null && filter.getCategoryId() == null)
-            return newsRepository.findAllByUserId(filter.getUserId());
-
-        return newsRepository.findAllByUserIdAndCategoryId(filter.getUserId(), filter.getCategoryId());
+        for (News n : newsList) {
+            n.setCommentCount(commentService.getCommentCountByNewsId(n.getId()));
+        }
+        return newsList;
     }
 
     @Override
@@ -41,9 +49,14 @@ public class NewsServiceImpl implements NewsService {
         if (filter.getPageSize() == null) filter.setPageSize(1000);
         if (filter.getPageNumber() == null) filter.setPageNumber(0);
 
-        return newsRepository.findAll(
+        List<News> newsList = newsRepository.findAll(
                 PageRequest.of(filter.getPageNumber(), filter.getPageSize())
         ).getContent();
+
+        for (News n : newsList) {
+            n.setCommentCount(commentService.getCommentCountByNewsId(n.getId()));
+        }
+        return newsList;
     }
 
     @Override

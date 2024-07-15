@@ -47,6 +47,9 @@ public class News {
     @Builder.Default
     private List<Comment> comments = new ArrayList<>();
 
+    @Transient
+    private Integer commentCount;
+
     public News setId(Long id) {
         this.id = id;
         return this;

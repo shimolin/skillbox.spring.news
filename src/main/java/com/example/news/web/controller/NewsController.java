@@ -25,13 +25,9 @@ public class NewsController {
     @GetMapping("/filter")
     public ResponseEntity<List<NewsResponse>> filterBy(NewsFilter filter) {
         return ResponseEntity.ok(
-                newsService.filterBy(filter).stream().map(
-                        (news -> {
-                            NewsResponse response = newsMapper.newsToResponse(news);
-                            response.setCommentCount(commentService.getCommentCountByNewsId(news.getId()));
-                            return response;
-                        })
-                ).collect(Collectors.toList()));
+                newsService.filterBy(filter).stream()
+                        .map(newsMapper::newsToResponse)
+                        .collect(Collectors.toList()));
     }
 
     @GetMapping

@@ -77,7 +77,7 @@ public class LoadDataOnStart {
                 Instant updatedAt = Instant.parse((CharSequence) o.get("updated_at"));//  "2024-06-06T04:33:44.471Z",
                 Long userId = (Long) o.get("user_id");
                 Long categoryId = (Long) o.get("category_id");
-                newsService.create(new News(id,title, body, createdAt, updatedAt, newsCategoryService.findById(categoryId), userService.findById(userId), null));
+                newsService.create(new News(id,title, body, createdAt, updatedAt, newsCategoryService.findById(categoryId), userService.findById(userId), null, null));
             }
 
             JSONArray comments = (JSONArray) data.get("comments");
