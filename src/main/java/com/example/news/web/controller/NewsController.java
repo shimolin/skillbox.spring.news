@@ -11,7 +11,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.concurrent.atomic.AtomicReference;
 import java.util.stream.Collectors;
 
 @RestController
@@ -39,9 +38,9 @@ public class NewsController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<NewsResponse> findById(@PathVariable Long id) {
+    public ResponseEntity<OneNewsResponse> findById(@PathVariable Long id) {
         return ResponseEntity.ok(
-                newsMapper.newsToResponse(
+                newsMapper.newsToOneNewsResponse(
                         newsService.findById(id)
                 )
         );
