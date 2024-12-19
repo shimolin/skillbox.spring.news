@@ -1,14 +1,28 @@
-INSERT INTO news_schema.users (birthday,first_name,last_name) VALUES
-                                                                  ('2000-01-01','Ivan','Ivanov'),
-                                                                  ('2001-02-02','Sergey','Sidorov'),
-                                                                  ('2002-03-03','Petr','Petrov'),
-                                                                  ('2003-03-03','Nikolay','Nikolaev'),
-                                                                  ('2004-04-04','Alexander','Alexandrov'),
-                                                                  ('2005-05-05','Igor','Igorev'),
-                                                                  ('2006-06-06','Victor','Victorov'),
-                                                                  ('2007-07-07','Ilya','Ilyushin'),
-                                                                  ('2008-08-08','Stepan','Stepanov'),
-                                                                  ('2009-09-09','Konstantin','Konstantinov');
+INSERT INTO news_schema.users (username, birthday,first_name,last_name, password) VALUES
+                                                                  ('ivanov','2000-01-01','Ivan','Ivanov', '$2a$12$S3hV5SBDIGGBxYq3lOwES.RxpYUX3NXJNSLGQnrhGclqA.OxYRD56'), -- pwd: 123
+                                                                  ('sidorov','2001-02-02','Sergey','Sidorov', ''),
+                                                                  ('petrov','2002-03-03','Petr','Petrov', ''),
+                                                                  ('nikolaev','2003-03-03','Nikolay','Nikolaev' ,''),
+                                                                  ('alexandrov','2004-04-04','Alexander','Alexandrov' ,''),
+                                                                  ('igorev','2005-05-05','Igor','Igorev' ,''),
+                                                                  ('victorov','2006-06-06','Victor','Victorov' ,''),
+                                                                  ('ilyushin','2007-07-07','Ilya','Ilyushin' ,''),
+                                                                  ('stepanov','2008-08-08','Stepan','Stepanov' ,''),
+                                                                  ('konstantinov','2009-09-09','Konstantin','Konstantinov' ,'');
+
+INSERT INTO news_schema.roles (authority, user_id) VALUES
+                                                       ('ROLE_ADMIN', 1),
+                                                       ('ROLE_ADMIN', 5),
+                                                       ('ROLE_MODERATOR', 2),
+                                                       ('ROLE_MODERATOR', 3),
+                                                       ('ROLE_USER', 3),
+                                                       ('ROLE_USER', 4),
+                                                       ('ROLE_USER', 5),
+                                                       ('ROLE_USER', 6),
+                                                       ('ROLE_USER', 7),
+                                                       ('ROLE_USER', 8),
+                                                       ('ROLE_USER', 9),
+                                                       ('ROLE_USER', 10);
 
 INSERT INTO news_schema.news_categories (name) VALUES
                                                    ('Sport'),

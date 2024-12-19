@@ -1,4 +1,6 @@
 package com.example.news.service;
+import com.example.news.model.Role;
+import com.example.news.model.RoleType;
 import com.example.news.model.User;
 import com.example.news.web.model.PageFilter;
 
@@ -9,7 +11,9 @@ public interface UserService {
 
     User findById(Long id);
 
-    User create(User user);
+    User findByUsername(String username);
+
+    User create(User user, Role role);
 
     User update(User user);
 

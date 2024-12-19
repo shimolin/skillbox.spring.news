@@ -4,61 +4,73 @@
       "birthday" : "2000-01-01",
       "id" : 1,
       "first_name" : "Ivan",
-      "last_name" : "Ivanov"
+      "last_name" : "Ivanov",
+      "password" : "123"
     },
     {
       "birthday" : "2001-02-02",
       "id" : 2,
       "first_name" : "Sergey",
-      "last_name" : "Sidorov"
+      "last_name" : "Sidorov",
+      "password" : "123"
+
     },
     {
       "birthday" : "2002-03-03",
       "id" : 3,
       "first_name" : "Petr",
-      "last_name" : "Petrov"
+      "last_name" : "Petrov",
+      "password" : "123"
     },
     {
       "birthday" : "2003-03-03",
       "id" : 4,
       "first_name" : "Nikolay",
-      "last_name" : "Nikolaev"
+      "last_name" : "Nikolaev",
+      "password" : "123"
+
     },
     {
       "birthday" : "2004-04-04",
       "id" : 5,
       "first_name" : "Alexander",
-      "last_name" : "Alexandrov"
+      "last_name" : "Alexandrov",
+      "password" : "123"
     },
     {
       "birthday" : "2005-05-05",
       "id" : 6,
       "first_name" : "Igor",
-      "last_name" : "Igorev"
+      "last_name" : "Igorev",
+      "password" : "123"
     },
     {
       "birthday" : "2006-06-06",
       "id" : 7,
       "first_name" : "Victor",
-      "last_name" : "Victorov"
+      "last_name" : "Victorov",
+      "password" : "123"
     },
     {
       "birthday" : "2007-07-07",
       "id" : 8,
       "first_name" : "Ilya",
-      "last_name" : "Ilyushin"
+      "last_name" : "Ilyushin",
+      "password" : "123"
     },
     {
       "birthday" : "2008-08-08",
       "id" : 9,
       "first_name" : "Stepan",
-      "last_name" : "Stepanov"
+      "last_name" : "Stepanov",
+      "password" : "123"
     },
     {
       "birthday" : "2009-09-09",
       "id" : 10,
       "first_name" : "Konstantin",
-      "last_name" : "Konstantinov"
+      "last_name" : "Konstantinov",
+      "password" : "123"
     }
   ],
   "news_categories": [

@@ -20,10 +20,6 @@ public interface NewsMapperV2 {
     @Mapping(source = "category.id", target = "categoryId")
     NewsResponse newsToResponse(News news);
 
-//    @Mapping(source = "user.id", target = "userId")
-//    @Mapping(source = "category.id", target = "categoryId")
-//    NewsResponseById newsToResponseById(News news);
-
     default public OneNewsResponse newsToOneNewsResponse(News news) {
         if ( news == null ) {
             return null;

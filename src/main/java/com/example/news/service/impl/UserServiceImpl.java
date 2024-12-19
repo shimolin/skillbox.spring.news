@@ -1,6 +1,8 @@
 package com.example.news.service.impl;
 
 import com.example.news.exception.EntityNotFoundException;
+import com.example.news.model.Role;
+import com.example.news.model.RoleType;
 import com.example.news.model.User;
 import com.example.news.repository.UserRepository;
 import com.example.news.service.UserService;
@@ -10,6 +12,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
 import java.text.MessageFormat;
+import java.util.Collections;
 import java.util.List;
 
 @Service
@@ -36,7 +39,15 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public User create(User user) {
+    public User findByUsername(String username) {
+        return userRepository.findByUsername(username)
+                .orElseThrow(() -> new RuntimeException("username not found!"));
+    }
+
+    @Override
+    public User create(User user, Role role) {
+        user.setRoles(Collections.singletonList(role));
+        role.setUser(user);
         return userRepository.save(user);
     }
 

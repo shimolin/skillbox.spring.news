@@ -1,5 +1,6 @@
 package com.example.news.web.model;
 
+import jakarta.persistence.Column;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
@@ -13,6 +14,11 @@ import java.time.LocalDate;
 @NoArgsConstructor
 public class UserRequest {
 
+    @NotBlank(message = "Username (login) must be not blank")
+    @Size(min = 3, max = 64, message = "3 <= FirstName.length <= 64 ")
+    private String username;
+
+
     @NotBlank(message = "FirstName must be not blank")
     @Size(min = 3, max = 64, message = "3 <= FirstName.length <= 64 ")
     private String firstName;
@@ -22,4 +28,7 @@ public class UserRequest {
     private String lastName;
 
     private LocalDate birthday;
+
+    private String password;
+
 }
