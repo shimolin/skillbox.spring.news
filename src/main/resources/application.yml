@@ -13,6 +13,7 @@ spring:
     hibernate:
       ddl-auto:  create
     defer-datasource-initialization: true
+
   sql:
     init:
       mode: always
@@ -21,4 +22,7 @@ app:
   load-data-on-start:
     enabled: false
     data-filename: /home/shimolin_ap@drsk.ru/skillbox/spring/news/src/main/resources/data.json
-  currentUserId: 6
+
+logging:
+  level:
+    root: info

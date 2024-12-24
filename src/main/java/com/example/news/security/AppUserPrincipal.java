@@ -1,17 +1,20 @@
 package com.example.news.security;
 
 import com.example.news.model.Role;
+import com.example.news.model.RoleType;
 import com.example.news.model.User;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.Collection;
+import java.util.Set;
 
 @RequiredArgsConstructor
 public class AppUserPrincipal implements UserDetails {
 
     private final User user;
+
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return user.getRoles().stream().map(Role::toAuthority).toList();

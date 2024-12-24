@@ -10,29 +10,40 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
 import java.util.List;
-import java.util.Set;
 import java.util.stream.Collectors;
 
+
 @Mapper(componentModel = MappingConstants.ComponentModel.SPRING)
-public abstract class UserMapperV2{
+public abstract class UserMapperV2 {
 
     @Autowired
     protected PasswordEncoder passwordEncoder;
 
-    @Mapping(target = "roles", source = "roles", qualifiedByName = "getUserRoles")
+//    @Mapping(target = "roles", source = "roles", qualifiedByName = "getUserRoles")
     public abstract UserResponse userToResponse(User user);
 
-    @Mapping(target = "password",  source= "password", qualifiedByName = "encodePassword")
+    @Mapping(target = "password", source = "password", qualifiedByName = "encodePassword")
+    @Mapping(target = "roles", source = "roles", qualifiedByName = "getRequestUserRoles")
     public abstract User requestToUser(UserRequest request);
 
     @Named("encodePassword")
-    protected String encodePassword(String password){
-        return passwordEncoder.encode(password);
+    protected String encodePassword(String password) {
+        if (password != null) {
+            return passwordEncoder.encode(password);
+        } else {
+            return null;
+        }
     }
 
-    @Named("getUserRoles")
-    protected Set<RoleType> getUserRoles(List<Role> roles){
-        return roles.stream().map(Role::getAuthority).collect(Collectors.toSet());
+//    @Named("getUserRoles")
+//    protected List<Role> getUserRoles(List<Role> roles){
+//        return roles.stream().map(Role::getAuthority).collect(Collectors.toList());
+//    }
+//
+    @Named("getRequestUserRoles")
+    protected List<Role> getRequestUserRoles(List<RoleType> roles){
+        return roles.stream().map(Role::from).collect(Collectors.toList());
     }
+
 
 }

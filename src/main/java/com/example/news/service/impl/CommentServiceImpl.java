@@ -1,7 +1,6 @@
 package com.example.news.service.impl;
 
 import com.example.news.aop.AuthorCheck;
-import com.example.news.configuration.AppConfiguration;
 import com.example.news.model.Comment;
 import com.example.news.model.News;
 import com.example.news.repository.CommentRepository;
@@ -23,7 +22,6 @@ public class CommentServiceImpl implements CommentService {
 
     private final CommentRepository commentRepository;
     private final UserService userService;
-    private final AppConfiguration appConfiguration;
 
 
     @Override
@@ -52,7 +50,8 @@ public class CommentServiceImpl implements CommentService {
     public Comment create(Comment comment) {
         comment.setCreatedAt(Instant.now());
         comment.setUpdatedAt(Instant.now());
-        comment.setUser(userService.findById(appConfiguration.currentUserId));
+        //TODO
+//        comment.setUser(userService.findById(appConfiguration.currentUserId));
         return commentRepository.save(comment);
     }
 

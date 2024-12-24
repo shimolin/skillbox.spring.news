@@ -32,8 +32,7 @@ public class User {
     @Column(name = "password", nullable = false)
     private String password;
 
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "user", cascade = CascadeType.ALL)
-    @EqualsAndHashCode.Exclude
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
     @ToString.Exclude
     @Builder.Default
     private List<Role> roles = new ArrayList<>();

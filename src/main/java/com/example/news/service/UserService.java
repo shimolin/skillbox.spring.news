@@ -3,6 +3,7 @@ import com.example.news.model.Role;
 import com.example.news.model.RoleType;
 import com.example.news.model.User;
 import com.example.news.web.model.PageFilter;
+import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.List;
 

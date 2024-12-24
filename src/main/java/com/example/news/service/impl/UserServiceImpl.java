@@ -1,9 +1,10 @@
 package com.example.news.service.impl;
 
+import com.example.news.aop.AuthorCheck;
 import com.example.news.exception.EntityNotFoundException;
 import com.example.news.model.Role;
-import com.example.news.model.RoleType;
 import com.example.news.model.User;
+import com.example.news.repository.RoleRepository;
 import com.example.news.repository.UserRepository;
 import com.example.news.service.UserService;
 import com.example.news.web.model.PageFilter;
@@ -20,8 +21,10 @@ import java.util.List;
 public class UserServiceImpl implements UserService {
 
     private final UserRepository userRepository;
+    private final RoleRepository roleRepository;
 
     @Override
+    @AuthorCheck
     public List<User> findAll(PageFilter filter) {
         if (filter.getPageSize() == null) filter.setPageSize(1000);
         if (filter.getPageNumber() == null) filter.setPageNumber(0);
@@ -53,10 +56,26 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public User update(User user) {
+
         User existedUser = findById(user.getId());
-        existedUser.setFirstName(user.getFirstName());
-        existedUser.setLastName(user.getLastName());
-        existedUser.setBirthday(user.getBirthday());
+
+        if (user.getUsername() != null) existedUser.setUsername(user.getUsername());
+        if (user.getPassword() != null) existedUser.setPassword(user.getPassword());
+
+        if (user.getRoles() != null) {
+            existedUser.getRoles().forEach(r ->
+                roleRepository.deleteById(r.getId()));
+            existedUser.getRoles().clear();
+            user.getRoles().forEach(r->{
+                existedUser.getRoles().add(r);
+                r.setUser(user);
+            });
+        }
+
+        if (user.getFirstName() != null) existedUser.setFirstName(user.getFirstName());
+        if (user.getLastName() != null) existedUser.setLastName(user.getLastName());
+        if (user.getBirthday() != null) existedUser.setBirthday(user.getBirthday());
+
         return userRepository.save(existedUser);
     }
 

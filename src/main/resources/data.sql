@@ -1,14 +1,14 @@
 INSERT INTO news_schema.users (username, birthday,first_name,last_name, password) VALUES
                                                                   ('ivanov','2000-01-01','Ivan','Ivanov', '$2a$12$S3hV5SBDIGGBxYq3lOwES.RxpYUX3NXJNSLGQnrhGclqA.OxYRD56'), -- pwd: 123
-                                                                  ('sidorov','2001-02-02','Sergey','Sidorov', ''),
-                                                                  ('petrov','2002-03-03','Petr','Petrov', ''),
-                                                                  ('nikolaev','2003-03-03','Nikolay','Nikolaev' ,''),
-                                                                  ('alexandrov','2004-04-04','Alexander','Alexandrov' ,''),
-                                                                  ('igorev','2005-05-05','Igor','Igorev' ,''),
-                                                                  ('victorov','2006-06-06','Victor','Victorov' ,''),
-                                                                  ('ilyushin','2007-07-07','Ilya','Ilyushin' ,''),
-                                                                  ('stepanov','2008-08-08','Stepan','Stepanov' ,''),
-                                                                  ('konstantinov','2009-09-09','Konstantin','Konstantinov' ,'');
+                                                                  ('sidorov','2001-02-02','Sergey','Sidorov', '$2a$12$pTYOhaGObl60AEB47k4axeKSnZ186TF9hzprFAK3quYxv5BCzp5Pe'),
+                                                                  ('petrov','2002-03-03','Petr','Petrov', '$2a$12$pTYOhaGObl60AEB47k4axeKSnZ186TF9hzprFAK3quYxv5BCzp5Pe'),
+                                                                  ('nikolaev','2003-03-03','Nikolay','Nikolaev' ,'$2a$12$pTYOhaGObl60AEB47k4axeKSnZ186TF9hzprFAK3quYxv5BCzp5Pe'),
+                                                                  ('alexandrov','2004-04-04','Alexander','Alexandrov' ,'$2a$12$pTYOhaGObl60AEB47k4axeKSnZ186TF9hzprFAK3quYxv5BCzp5Pe'),
+                                                                  ('igorev','2005-05-05','Igor','Igorev' ,'$2a$12$pTYOhaGObl60AEB47k4axeKSnZ186TF9hzprFAK3quYxv5BCzp5Pe'),
+                                                                  ('victorov','2006-06-06','Victor','Victorov' ,'$2a$12$pTYOhaGObl60AEB47k4axeKSnZ186TF9hzprFAK3quYxv5BCzp5Pe'),
+                                                                  ('ilyushin','2007-07-07','Ilya','Ilyushin' ,'$2a$12$pTYOhaGObl60AEB47k4axeKSnZ186TF9hzprFAK3quYxv5BCzp5Pe'),
+                                                                  ('stepanov','2008-08-08','Stepan','Stepanov' ,'$2a$12$pTYOhaGObl60AEB47k4axeKSnZ186TF9hzprFAK3quYxv5BCzp5Pe'),
+                                                                  ('konstantinov','2009-09-09','Konstantin','Konstantinov' ,'$2a$12$pTYOhaGObl60AEB47k4axeKSnZ186TF9hzprFAK3quYxv5BCzp5Pe');
 
 INSERT INTO news_schema.roles (authority, user_id) VALUES
                                                        ('ROLE_ADMIN', 1),

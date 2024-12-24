@@ -1,7 +1,6 @@
 package com.example.news.service.impl;
 
 import com.example.news.aop.AuthorCheck;
-import com.example.news.configuration.AppConfiguration;
 import com.example.news.exception.EntityNotFoundException;
 import com.example.news.model.News;
 import com.example.news.repository.NewsRepository;
@@ -25,7 +24,6 @@ public class NewsServiceImpl implements NewsService {
     private final NewsRepository newsRepository;
     private final UserService userService;
     private final CommentService commentService;
-    private final AppConfiguration appConfiguration;
 
     @Override
     public List<News> filterBy(NewsFilter filter) {
@@ -70,7 +68,8 @@ public class NewsServiceImpl implements NewsService {
     public News create(News news) {
         news.setCreatedAt(Instant.now());
         news.setUpdatedAt(Instant.now());
-        news.setUser(userService.findById(appConfiguration.currentUserId));
+        //TODO
+//        news.setUser(userService.findById(appConfiguration.currentUserId));
         return newsRepository.save(news);
     }
 

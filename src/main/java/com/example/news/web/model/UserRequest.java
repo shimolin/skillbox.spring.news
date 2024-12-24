@@ -1,5 +1,7 @@
 package com.example.news.web.model;
 
+import com.example.news.model.Role;
+import com.example.news.model.RoleType;
 import jakarta.persistence.Column;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
@@ -8,6 +10,8 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.time.LocalDate;
+import java.util.List;
+import java.util.Set;
 
 @Data
 @AllArgsConstructor
@@ -30,5 +34,8 @@ public class UserRequest {
     private LocalDate birthday;
 
     private String password;
+
+    private List<RoleType> roles;
+
 
 }
