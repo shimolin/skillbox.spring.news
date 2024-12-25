@@ -35,7 +35,7 @@ public class UserRequest {
 
     private String password;
 
-    private List<RoleType> roles;
+//    private List<RoleType> roles;
 
 
 }

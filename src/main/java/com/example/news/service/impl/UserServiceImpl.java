@@ -15,6 +15,7 @@ import org.springframework.stereotype.Service;
 import java.text.MessageFormat;
 import java.util.Collections;
 import java.util.List;
+import java.util.Set;
 
 @Service
 @RequiredArgsConstructor
@@ -48,25 +49,27 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public User create(User user, Role role) {
-        user.setRoles(Collections.singletonList(role));
-        role.setUser(user);
+    public User create(User user, List<Role> roles) {
+        user.setRoles(roles);
+        for (Role r : roles) {
+            r.setUser(user);
+        }
         return userRepository.save(user);
     }
 
     @Override
-    public User update(User user) {
+    public User update(User user, List<Role> roles) {
 
         User existedUser = findById(user.getId());
 
         if (user.getUsername() != null) existedUser.setUsername(user.getUsername());
         if (user.getPassword() != null) existedUser.setPassword(user.getPassword());
 
-        if (user.getRoles() != null) {
+        if (roles != null) {
             existedUser.getRoles().forEach(r ->
-                roleRepository.deleteById(r.getId()));
+                    roleRepository.deleteById(r.getId()));
             existedUser.getRoles().clear();
-            user.getRoles().forEach(r->{
+            roles.forEach(r -> {
                 existedUser.getRoles().add(r);
                 r.setUser(user);
             });

@@ -7,8 +7,10 @@ import com.example.news.web.model.NewsCategoryResponse;
 import com.example.news.web.model.PageFilter;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -22,20 +24,24 @@ public class NewsCategoryController {
     private final NewsCategoryMapperV2 newsCategoryMapper;
 
     @GetMapping
-    public ResponseEntity<List<NewsCategoryResponse>> findAll(PageFilter filter) {
+    @PreAuthorize("hasAnyAuthority('ROLE_ADMIN', 'ROLE_USER', 'ROLE_MODERATOR')")
+    public ResponseEntity<List<NewsCategoryResponse>> findAll(@RequestParam(defaultValue = "0") int page,
+                                                              @RequestParam(defaultValue = "100") int size) {
         return ResponseEntity.ok(
-                newsCategoryService.findAll(filter).stream()
+                newsCategoryService.findAll(PageRequest.of(page, size)).stream()
                         .map(newsCategoryMapper::newsCategoryToResponse)
                         .collect(Collectors.toList()));
     }
 
     @GetMapping("/{id}")
+    @PreAuthorize("hasAnyAuthority('ROLE_ADMIN', 'ROLE_USER', 'ROLE_MODERATOR')")
     public ResponseEntity<NewsCategoryResponse> findById(@PathVariable Long id) {
         return ResponseEntity.ok(
                 newsCategoryMapper.newsCategoryToResponse(newsCategoryService.findById(id)));
     }
 
     @PostMapping
+    @PreAuthorize("hasAnyAuthority('ROLE_ADMIN', 'ROLE_MODERATOR')")
     public ResponseEntity<NewsCategoryResponse> create(@RequestBody @Valid NewsCategoryRequest request) {
         return ResponseEntity.status(HttpStatus.CREATED)
                 .body(newsCategoryMapper.newsCategoryToResponse(
@@ -46,6 +52,7 @@ public class NewsCategoryController {
     }
 
     @PutMapping("/{id}")
+    @PreAuthorize("hasAnyAuthority('ROLE_ADMIN', 'ROLE_MODERATOR')")
     public ResponseEntity<NewsCategoryResponse> update(@PathVariable Long id, @RequestBody @Valid NewsCategoryRequest newsCategoryRequest){
         return ResponseEntity.ok(
                 newsCategoryMapper.newsCategoryToResponse(
@@ -57,6 +64,7 @@ public class NewsCategoryController {
     }
 
     @DeleteMapping("/{id}")
+    @PreAuthorize("hasAnyAuthority('ROLE_ADMIN', 'ROLE_MODERATOR')")
     public void delete(@PathVariable Long id){
         newsCategoryService.deleteById(id);
     }

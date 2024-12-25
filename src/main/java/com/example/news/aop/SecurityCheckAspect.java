@@ -1,5 +1,6 @@
 package com.example.news.aop;
 
+import com.example.news.exception.ForbiddenException;
 import com.example.news.exception.NotPermitException;
 import com.example.news.model.Role;
 import com.example.news.model.RoleType;
@@ -13,6 +14,7 @@ import org.springframework.stereotype.Component;
 
 import java.util.HashSet;
 import java.util.List;
+import java.util.Objects;
 import java.util.Set;
 
 @Aspect
@@ -23,14 +25,7 @@ public class SecurityCheckAspect {
     private final UserService userService;
 
     @Around("@annotation(SecurityCheck) && args(userDetails, requestedUserId, ..)")
-    public Object securityCheck(ProceedingJoinPoint pjp, UserDetails userDetails, Long requestedUserId){
-
-
-        System.out.println("---Annotation.SecurityCheck---");
-        System.out.println(pjp.getSignature().getDeclaringTypeName());
-        System.out.println(userDetails.getUsername());
-        System.out.println(userDetails.getAuthorities());
-        System.out.println(requestedUserId);
+    public Object securityCheck(ProceedingJoinPoint pjp, UserDetails userDetails, Long requestedUserId) {
 
         Long currentUserId = userService.findByUsername(userDetails.getUsername()).getId();
         List<Role> currentUserRoles = userService.findByUsername(userDetails.getUsername()).getRoles();
@@ -39,22 +34,18 @@ public class SecurityCheckAspect {
             currentUserRoleTypes.add(r.getAuthority());
         };
 
-        Boolean securityCheck = false;
+        boolean securityCheck = false;
 
         if(currentUserRoleTypes.contains(RoleType.ROLE_ADMIN) || currentUserRoleTypes.contains(RoleType.ROLE_MODERATOR)){
             securityCheck = true;
         } else {
-            if (currentUserId == requestedUserId) securityCheck = true;
+            if (Objects.equals(currentUserId, requestedUserId)) securityCheck = true;
 
         }
 
         if(!securityCheck){
-            throw new NotPermitException("Not permitted!!!");
+            throw new ForbiddenException("Forbidden!!!");
         }
-
-
-
-
 
         try {
             return pjp.proceed();

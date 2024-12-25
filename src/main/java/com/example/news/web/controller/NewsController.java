@@ -1,5 +1,7 @@
 package com.example.news.web.controller;
 
+import com.example.news.aop.AuthorCheck;
+import com.example.news.aop.SecurityCheck;
 import com.example.news.mapper.v2.NewsMapperV2;
 import com.example.news.service.CommentService;
 import com.example.news.service.NewsService;
@@ -8,6 +10,9 @@ import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -22,6 +27,7 @@ public class NewsController {
     private final NewsMapperV2 newsMapper;
 
     @GetMapping("/filter")
+    @PreAuthorize("hasAnyAuthority('ROLE_ADMIN', 'ROLE_USER', 'ROLE_MODERATOR')")
     public ResponseEntity<List<NewsResponse>> filterBy(NewsFilter filter) {
         return ResponseEntity.ok(
                 newsService.filterBy(filter).stream()
@@ -30,6 +36,7 @@ public class NewsController {
     }
 
     @GetMapping
+    @PreAuthorize("hasAnyAuthority('ROLE_ADMIN', 'ROLE_USER', 'ROLE_MODERATOR')")
     public ResponseEntity<List<NewsResponse>> findAll(PageFilter filter) {
         return ResponseEntity.ok(
                 newsService.findAll(filter).stream()
@@ -38,6 +45,7 @@ public class NewsController {
     }
 
     @GetMapping("/{id}")
+    @PreAuthorize("hasAnyAuthority('ROLE_ADMIN', 'ROLE_USER', 'ROLE_MODERATOR')")
     public ResponseEntity<OneNewsResponse> findById(@PathVariable Long id) {
         return ResponseEntity.ok(
                 newsMapper.newsToOneNewsResponse(
@@ -47,17 +55,20 @@ public class NewsController {
     }
 
     @PostMapping
-    public ResponseEntity<NewsResponse> create(@RequestBody @Valid NewsRequest request) {
+    @PreAuthorize("hasAnyAuthority('ROLE_ADMIN', 'ROLE_USER', 'ROLE_MODERATOR')")
+    public ResponseEntity<NewsResponse> create(@AuthenticationPrincipal UserDetails userDetails, @RequestBody @Valid NewsRequest request) {
         return ResponseEntity.status(HttpStatus.CREATED)
                 .body(newsMapper.newsToResponse(
                         newsService.create(
-                                newsMapper.requestToNews(request)
+                                newsMapper.requestToNews(request), userDetails
                         )
                 ));
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<NewsResponse> update(@PathVariable Long id, @RequestBody @Valid NewsRequest newsRequest) {
+    @PreAuthorize("hasAnyAuthority('ROLE_ADMIN', 'ROLE_USER', 'ROLE_MODERATOR')")
+    @AuthorCheck
+    public ResponseEntity<NewsResponse> update(@AuthenticationPrincipal UserDetails userDetails, @PathVariable Long id, @RequestBody @Valid NewsRequest newsRequest) {
         return ResponseEntity.ok(
                 newsMapper.newsToResponse(
                         newsService.update(
@@ -68,7 +79,9 @@ public class NewsController {
     }
 
     @DeleteMapping("/{id}")
-    public void delete(@PathVariable Long id) {
+    @PreAuthorize("hasAnyAuthority('ROLE_ADMIN', 'ROLE_USER', 'ROLE_MODERATOR')")
+    @SecurityCheck
+    public void delete(@AuthenticationPrincipal UserDetails userDetails, @PathVariable Long id) {
         newsService.deleteById(id);
     }
 

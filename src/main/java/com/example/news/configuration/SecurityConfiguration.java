@@ -43,9 +43,8 @@ public class SecurityConfiguration {
         http.authorizeHttpRequests((auth) -> auth
                         .requestMatchers("/api/user/**").hasAnyRole("USER", "ADMIN", "MODERATOR")
                         .requestMatchers("/api/user/admin/**").hasAnyRole("ADMIN")
-                        .requestMatchers("/api/roles/**").permitAll()
                         .requestMatchers("/api/news/**").permitAll()
-                        .requestMatchers("/api/newscategory/**").permitAll()
+                        .requestMatchers("/api/newscategory/**").hasAnyRole("USER", "ADMIN", "MODERATOR")
                         .requestMatchers("/api/comment/**").permitAll()
                         .anyRequest().authenticated())
                 .csrf(AbstractHttpConfigurer::disable)

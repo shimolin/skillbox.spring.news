@@ -20,9 +20,9 @@ public class NewsCategoryServiceImpl implements NewsCategoryService {
     private final NewsCategoryRepository newsCategoryRepository;
 
     @Override
-    public List<NewsCategory> findAll(PageFilter filter) {
+    public List<NewsCategory> findAll(PageRequest pageRequest) {
         return newsCategoryRepository.findAll(
-                PageRequest.of(filter.getPageNumber(), filter.getPageSize())
+                PageRequest.of(pageRequest.getPageNumber(), pageRequest.getPageSize())
         ).getContent();
     }
 

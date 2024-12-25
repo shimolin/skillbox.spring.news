@@ -11,6 +11,7 @@ import com.example.news.web.model.NewsFilter;
 import com.example.news.web.model.PageFilter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 
 import java.text.MessageFormat;
@@ -65,11 +66,10 @@ public class NewsServiceImpl implements NewsService {
     }
 
     @Override
-    public News create(News news) {
+    public News create(News news, UserDetails userDetails) {
         news.setCreatedAt(Instant.now());
         news.setUpdatedAt(Instant.now());
-        //TODO
-//        news.setUser(userService.findById(appConfiguration.currentUserId));
+        news.setUser(userService.findByUsername(userDetails.getUsername()));
         return newsRepository.save(news);
     }
 

@@ -25,6 +25,6 @@ public class UserResponse {
 
     private LocalDate birthday;
 
-    private List<Role> roles;
+    private List<RoleType> roles;
 
 }

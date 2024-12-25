@@ -14,9 +14,9 @@ public interface UserService {
 
     User findByUsername(String username);
 
-    User create(User user, Role role);
+    User create(User user, List<Role> role);
 
-    User update(User user);
+    User update(User user, List<Role> role);
 
     void deleteById(Long id);
 

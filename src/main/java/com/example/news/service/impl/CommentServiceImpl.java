@@ -9,6 +9,7 @@ import com.example.news.exception.EntityNotFoundException;
 import com.example.news.service.UserService;
 import com.example.news.web.model.CommentFilter;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 
 import java.text.MessageFormat;
@@ -47,11 +48,10 @@ public class CommentServiceImpl implements CommentService {
     }
 
     @Override
-    public Comment create(Comment comment) {
+    public Comment create(Comment comment, UserDetails userDetails) {
         comment.setCreatedAt(Instant.now());
         comment.setUpdatedAt(Instant.now());
-        //TODO
-//        comment.setUser(userService.findById(appConfiguration.currentUserId));
+        comment.setUser(userService.findByUsername(userDetails.getUsername()));
         return commentRepository.save(comment);
     }
 

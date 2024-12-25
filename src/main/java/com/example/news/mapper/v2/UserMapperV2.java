@@ -19,11 +19,11 @@ public abstract class UserMapperV2 {
     @Autowired
     protected PasswordEncoder passwordEncoder;
 
-//    @Mapping(target = "roles", source = "roles", qualifiedByName = "getUserRoles")
+    @Mapping(target = "roles", source = "roles", qualifiedByName = "getUserRoles")
     public abstract UserResponse userToResponse(User user);
 
     @Mapping(target = "password", source = "password", qualifiedByName = "encodePassword")
-    @Mapping(target = "roles", source = "roles", qualifiedByName = "getRequestUserRoles")
+//    @Mapping(target = "roles", source = "roles", qualifiedByName = "getRequestUserRoles")
     public abstract User requestToUser(UserRequest request);
 
     @Named("encodePassword")
@@ -35,11 +35,11 @@ public abstract class UserMapperV2 {
         }
     }
 
-//    @Named("getUserRoles")
-//    protected List<Role> getUserRoles(List<Role> roles){
-//        return roles.stream().map(Role::getAuthority).collect(Collectors.toList());
-//    }
-//
+    @Named("getUserRoles")
+    protected List<RoleType> getUserRoles(List<Role> roles){
+        return roles.stream().map(Role::getAuthority).collect(Collectors.toList());
+    }
+
     @Named("getRequestUserRoles")
     protected List<Role> getRequestUserRoles(List<RoleType> roles){
         return roles.stream().map(Role::from).collect(Collectors.toList());

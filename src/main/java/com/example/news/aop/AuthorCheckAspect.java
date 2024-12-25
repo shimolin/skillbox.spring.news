@@ -34,21 +34,18 @@ public class AuthorCheckAspect {
         var pathVar = (Map<String, String>) request.getAttribute(HandlerMapping.URI_TEMPLATE_VARIABLES_ATTRIBUTE);
         Long pathVarId = Long.valueOf(pathVar.get("id"));
 
-        System.out.println("---Annotation.AuthorCheck---");
-        System.out.println(pjp.getSignature().getDeclaringTypeName());
-        System.out.println(userDetails.getUsername());
-        System.out.println(userDetails.getAuthorities());
-        System.out.println(requestedUserId);
-
         Long currentUserId = userService.findByUsername(userDetails.getUsername()).getId();
 
         Long authorId = switch (pjp.getSignature().getDeclaringTypeName()) {
-//            case "com.example.news.web.controller.UserController" ->
-//                userService.findByUsername(userDetails.getUsername()).getId();
-            case "com.example.news.service.impl.NewsServiceImpl" ->
+
+            case "com.example.news.web.controller.NewsController",
+                    "com.example.news.service.impl.NewsServiceImpl" ->
                     newsService.findById(pathVarId).getUser().getId();
-            case "com.example.news.service.impl.CommentServiceImpl" ->
+
+            case "com.example.news.web.controller.CommentController",
+                    "com.example.news.service.impl.CommentServiceImpl" ->
                     commentService.findById(pathVarId).getUser().getId();
+
             default -> null;
         };
 
