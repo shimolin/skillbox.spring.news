@@ -67,7 +67,7 @@ public class CommentController {
     @PutMapping("/{id}")
     @PreAuthorize("hasAnyAuthority('ROLE_ADMIN', 'ROLE_USER', 'ROLE_MODERATOR')")
     @AuthorCheck
-    public ResponseEntity<CommentResponse> update(@AuthenticationPrincipal UserDetails userDetails,@PathVariable Long id, @RequestBody @Valid CommentRequest request) {
+    public ResponseEntity<CommentResponse> update(@AuthenticationPrincipal UserDetails userDetails,@PathVariable Long id, @RequestBody CommentRequest request) {
         return ResponseEntity.ok(
                 commentMapper.commentToResponse(
                         commentService.update(
