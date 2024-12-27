@@ -32,7 +32,7 @@ public class Comment {
     @ToString.Exclude
     private User user;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "news_id", nullable = false)
     @ToString.Exclude
     private News news;

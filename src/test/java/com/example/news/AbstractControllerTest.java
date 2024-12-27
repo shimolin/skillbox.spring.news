@@ -31,7 +31,7 @@ import java.util.List;
 @Transactional
 @ActiveProfiles("test")
 @Testcontainers
-public class AbstractTestController {
+public class AbstractControllerTest {
 
     protected static PostgreSQLContainer postgreSQLContainer;
 
@@ -65,27 +65,27 @@ public class AbstractTestController {
     @Autowired
     protected ObjectMapper objectMapper;
 
-    @BeforeEach
-    public void userCreate() {
-        userService.create(User.builder()
-                .username("testUser")
-                .firstName("user")
-                .lastName("user")
-                .password("111")
-                .build(), List.of(Role.from(RoleType.ROLE_USER)));
-
-        userService.create(User.builder()
-                .username("testAdmin")
-                .firstName("admin")
-                .lastName("admin")
-                .password("123")
-                .build(), List.of(Role.from(RoleType.ROLE_ADMIN)));
-    }
-
-    @AfterEach
-    public void userDelete(){
-        userRepository.deleteAll();
-    }
+//    @BeforeEach
+//    public void userCreate() {
+//        userService.create(User.builder()
+//                .username("testUser")
+//                .firstName("user")
+//                .lastName("user")
+//                .password("111")
+//                .build(), List.of(Role.from(RoleType.ROLE_USER)));
+//
+//        userService.create(User.builder()
+//                .username("testAdmin")
+//                .firstName("admin")
+//                .lastName("admin")
+//                .password("123")
+//                .build(), List.of(Role.from(RoleType.ROLE_ADMIN)));
+//    }
+//
+//    @AfterEach
+//    public void userDelete(){
+//        userRepository.deleteAll();
+//    }
 
 
 }

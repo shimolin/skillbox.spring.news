@@ -33,7 +33,7 @@ public class CommentController {
 //                        .map(commentMapper::commentToResponse)
 //                        .collect(Collectors.toList()));
 //    }
-
+//
 //    @GetMapping("/{id}")
 //    public ResponseEntity<CommentResponse> findById(@PathVariable Long id) {
 //        return ResponseEntity.ok(

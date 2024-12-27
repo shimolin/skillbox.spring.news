@@ -4,7 +4,6 @@ import com.example.news.mapper.v2.NewsCategoryMapperV2;
 import com.example.news.service.NewsCategoryService;
 import com.example.news.web.model.NewsCategoryRequest;
 import com.example.news.web.model.NewsCategoryResponse;
-import com.example.news.web.model.PageFilter;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.PageRequest;

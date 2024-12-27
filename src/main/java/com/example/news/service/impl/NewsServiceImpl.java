@@ -77,10 +77,10 @@ public class NewsServiceImpl implements NewsService {
     @AuthorCheck
     public News update(News news) {
         News existedNews = findById(news.getId());
+        if(news.getTitle() != null) existedNews.setTitle(news.getTitle());
+        if(news.getBody() != null)existedNews.setBody(news.getBody());
+        if(news.getCategory().getId() != null)existedNews.setCategory(news.getCategory());
         existedNews.setUpdatedAt(Instant.now());
-        existedNews.setTitle(news.getTitle());
-        existedNews.setBody(news.getBody());
-        existedNews.setCategory(news.getCategory());
         return newsRepository.save(existedNews);
     }
 

@@ -1,5 +1,6 @@
 package com.example.news.aop;
 
+import com.example.news.exception.ForbiddenException;
 import com.example.news.exception.NotPermitException;
 import com.example.news.service.CommentService;
 import com.example.news.service.NewsService;
@@ -50,7 +51,7 @@ public class AuthorCheckAspect {
         };
 
         if (!currentUserId.equals(authorId)) {
-            throw new NotPermitException("Not Permitted!");
+            throw new ForbiddenException("Forbidden!!!");
         }
 
         try {

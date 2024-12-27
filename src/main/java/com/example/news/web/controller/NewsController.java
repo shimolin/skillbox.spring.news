@@ -68,7 +68,7 @@ public class NewsController {
     @PutMapping("/{id}")
     @PreAuthorize("hasAnyAuthority('ROLE_ADMIN', 'ROLE_USER', 'ROLE_MODERATOR')")
     @AuthorCheck
-    public ResponseEntity<NewsResponse> update(@AuthenticationPrincipal UserDetails userDetails, @PathVariable Long id, @RequestBody @Valid NewsRequest newsRequest) {
+    public ResponseEntity<NewsResponse> update(@AuthenticationPrincipal UserDetails userDetails, @PathVariable Long id, @RequestBody NewsRequest newsRequest) {
         return ResponseEntity.ok(
                 newsMapper.newsToResponse(
                         newsService.update(

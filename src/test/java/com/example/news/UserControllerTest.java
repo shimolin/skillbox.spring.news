@@ -1,70 +1,124 @@
 package com.example.news;
 
 import org.junit.jupiter.api.Test;
+import org.springframework.http.MediaType;
 import org.springframework.security.test.context.support.TestExecutionEvent;
-import org.springframework.security.test.context.support.WithMockUser;
-
 import org.springframework.security.test.context.support.WithUserDetails;
-import org.springframework.test.web.servlet.ResultMatcher;
 
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-public class UserControllerTest extends AbstractTestController {
+public class UserControllerTest extends AbstractControllerTest {
+
     @Test
-    @WithMockUser(username = "user", roles = {"USER"})
-    public void getAllWithRoleUser_thenReturnForbidden() throws Exception {
+    @WithUserDetails(userDetailsServiceBeanName = "userDetailServiceImpl",
+            value = "ivanov", setupBefore = TestExecutionEvent.TEST_EXECUTION)
+    public void testUserWithROLE_ADMIN() throws Exception {
+
         mockMvc.perform(get("/api/user"))
-                .andExpect(status().isForbidden())
-                .andExpect(content().string(""));
-    }
+                .andExpect(status().isOk());
 
-    @Test
-    @WithMockUser(username = "admin", roles = {"ADMIN"})
-    public void getAllWithRoleAdmin_thenReturnOk() throws Exception {
-        mockMvc.perform(get("/api/user"))
-                .andExpect(status().isOk())
-                .andExpect(ResultMatcher.matchAll());
-    }
-
-    @Test
-    @WithUserDetails(userDetailsServiceBeanName = "userDetailServiceImpl",
-            value = "ivanov",
-            setupBefore = TestExecutionEvent.TEST_EXECUTION)
-    public void getByIdWithDBUserRoleAdmin_thenReturnOk() throws Exception {
-        mockMvc.perform(get("/api/user/4"))
-                .andExpect(status().isOk())
-                .andExpect(content().string("{\"id\":4," +
-                        "\"username\":\"nikolaev\"," +
-                        "\"firstName\":\"Nikolay\"," +
-                        "\"lastName\":\"Nikolaev\"," +
-                        "\"birthday\":\"2003-03-03\"," +
-                        "\"roles\":[\"ROLE_USER\"]}"));
-    }
-
-    @Test
-    @WithUserDetails(userDetailsServiceBeanName = "userDetailServiceImpl",
-            value = "nikolaev",
-            setupBefore = TestExecutionEvent.TEST_EXECUTION)
-    public void getByIdWithDBUserRoleUser_thenReturnOk() throws Exception {
-        mockMvc.perform(get("/api/user/4"))
-                .andExpect(status().isOk())
-                .andExpect(content().string("{\"id\":4," +
-                        "\"username\":\"nikolaev\"," +
-                        "\"firstName\":\"Nikolay\"," +
-                        "\"lastName\":\"Nikolaev\"," +
-                        "\"birthday\":\"2003-03-03\"," +
-                        "\"roles\":[\"ROLE_USER\"]}"));
-    }
-
-    @Test
-    @WithUserDetails(userDetailsServiceBeanName = "userDetailServiceImpl",
-            value = "nikolaev",
-            setupBefore = TestExecutionEvent.TEST_EXECUTION)
-    public void getByIdWithDBUserRoleUser_thenReturnForbidden() throws Exception {
         mockMvc.perform(get("/api/user/1"))
+                .andExpect(status().isOk());
+
+        mockMvc.perform(get("/api/user/5"))
+                .andExpect(status().isOk());
+
+        mockMvc.perform(post("/api/user")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content("{\n" +
+                                "    \"username\": \"aaa\",\n" +
+                                "    \"password\": \"555\",\n" +
+                                "    \"firstName\": \"aaa\",\n" +
+                                "    \"lastName\": \"aaa\",\n" +
+                                "    \"birthday\": \"2000-01-01\"\n" +
+                                "}"))
+                .andExpect(status().isCreated());
+
+        mockMvc.perform(put("/api/user/6")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content("{\"firstName\": \"bbbb\"}"))
+                .andExpect(status().isOk());
+
+        mockMvc.perform(delete("/api/user/6"))
+                .andExpect(status().isOk());
+    }
+
+    @Test
+    @WithUserDetails(userDetailsServiceBeanName = "userDetailServiceImpl",
+            value = "petrov", setupBefore = TestExecutionEvent.TEST_EXECUTION)
+    public void testUserWithROLE_MODERATOR() throws Exception {
+
+        mockMvc.perform(get("/api/user"))
                 .andExpect(status().isForbidden());
+
+        mockMvc.perform(get("/api/user/2"))
+                .andExpect(status().isOk());
+
+        mockMvc.perform(get("/api/user/5"))
+                .andExpect(status().isOk());
+
+        mockMvc.perform(post("/api/user")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content("{\n" +
+                                "    \"username\": \"aaa\",\n" +
+                                "    \"password\": \"555\",\n" +
+                                "    \"firstName\": \"aaa\",\n" +
+                                "    \"lastName\": \"aaa\",\n" +
+                                "    \"birthday\": \"2000-01-01\"\n" +
+                                "}"))
+                .andExpect(status().isCreated());
+
+        mockMvc.perform(put("/api/user/6")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content("{\"firstName\": \"bbbb\"}"))
+                .andExpect(status().isOk());
+
+        mockMvc.perform(delete("/api/user/6"))
+                .andExpect(status().isOk());
+    }
+
+    @Test
+    @WithUserDetails(userDetailsServiceBeanName = "userDetailServiceImpl",
+            value = "sidorov", setupBefore = TestExecutionEvent.TEST_EXECUTION)
+    public void testUserWithROLE_USER() throws Exception {
+
+        mockMvc.perform(get("/api/user"))
+                .andExpect(status().isForbidden());
+
+        mockMvc.perform(get("/api/user/3"))
+                .andExpect(status().isOk());
+
+        mockMvc.perform(get("/api/user/5"))
+                .andExpect(status().isForbidden());
+
+        mockMvc.perform(post("/api/user")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content("{\n" +
+                                "    \"username\": \"aaa\",\n" +
+                                "    \"password\": \"555\",\n" +
+                                "    \"firstName\": \"aaa\",\n" +
+                                "    \"lastName\": \"aaa\",\n" +
+                                "    \"birthday\": \"2000-01-01\"\n" +
+                                "}"))
+                .andExpect(status().isCreated());
+
+        mockMvc.perform(put("/api/user/3")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content("{\"firstName\": \"Sidoroff\"}"))
+                .andExpect(status().isOk());
+
+        mockMvc.perform(put("/api/user/6")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content("{\"firstName\": \"bbbb\"}"))
+                .andExpect(status().isForbidden());
+
+        mockMvc.perform(delete("/api/user/8"))
+                .andExpect(status().isForbidden());
+
+        mockMvc.perform(delete("/api/user/3"))
+                .andExpect(status().isOk());
+
     }
 
 }

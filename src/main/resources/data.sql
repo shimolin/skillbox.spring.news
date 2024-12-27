@@ -1,7 +1,7 @@
 INSERT INTO news_schema.users (username, birthday,first_name,last_name, password) VALUES
                                                                   ('ivanov','2000-01-01','Ivan','Ivanov', '$2a$12$S3hV5SBDIGGBxYq3lOwES.RxpYUX3NXJNSLGQnrhGclqA.OxYRD56'), -- pwd: 123
-                                                                  ('sidorov','2001-02-02','Sergey','Sidorov', '$2a$12$pTYOhaGObl60AEB47k4axeKSnZ186TF9hzprFAK3quYxv5BCzp5Pe'),
                                                                   ('petrov','2002-03-03','Petr','Petrov', '$2a$12$pTYOhaGObl60AEB47k4axeKSnZ186TF9hzprFAK3quYxv5BCzp5Pe'),
+                                                                  ('sidorov','2001-02-02','Sergey','Sidorov', '$2a$12$pTYOhaGObl60AEB47k4axeKSnZ186TF9hzprFAK3quYxv5BCzp5Pe'),
                                                                   ('nikolaev','2003-03-03','Nikolay','Nikolaev' ,'$2a$12$pTYOhaGObl60AEB47k4axeKSnZ186TF9hzprFAK3quYxv5BCzp5Pe'),
                                                                   ('alexandrov','2004-04-04','Alexander','Alexandrov' ,'$2a$12$pTYOhaGObl60AEB47k4axeKSnZ186TF9hzprFAK3quYxv5BCzp5Pe'),
                                                                   ('igorev','2005-05-05','Igor','Igorev' ,'$2a$12$pTYOhaGObl60AEB47k4axeKSnZ186TF9hzprFAK3quYxv5BCzp5Pe'),
@@ -12,9 +12,7 @@ INSERT INTO news_schema.users (username, birthday,first_name,last_name, password
 
 INSERT INTO news_schema.roles (authority, user_id) VALUES
                                                        ('ROLE_ADMIN', 1),
-                                                       ('ROLE_ADMIN', 5),
                                                        ('ROLE_MODERATOR', 2),
-                                                       ('ROLE_MODERATOR', 3),
                                                        ('ROLE_USER', 3),
                                                        ('ROLE_USER', 4),
                                                        ('ROLE_USER', 5),
@@ -22,7 +20,9 @@ INSERT INTO news_schema.roles (authority, user_id) VALUES
                                                        ('ROLE_USER', 7),
                                                        ('ROLE_USER', 8),
                                                        ('ROLE_USER', 9),
-                                                       ('ROLE_USER', 10);
+                                                       ('ROLE_ADMIN', 9),
+                                                       ('ROLE_USER', 10),
+                                                       ('ROLE_MODERATOR', 10);
 
 INSERT INTO news_schema.news_categories (name) VALUES
                                                    ('Sport'),
@@ -31,7 +31,7 @@ INSERT INTO news_schema.news_categories (name) VALUES
 
 INSERT INTO news_schema.news (category_id,created_at,updated_at,user_id,body,title) VALUES
                                                                                         (1,'2024-07-02 14:07:48.240791+10','2024-07-02 14:07:48.242813+10',1,' Some text....','News from user: FN 1 LN 1'),
-                                                                                        (1,'2024-07-02 14:07:48.251319+10','2024-07-02 14:07:48.25224+10',3,' Some text....','News from user: FN 3 LN 3'),
+                                                                                        (1,'2024-07-02 14:07:48.251319+10','2024-07-02 14:07:48.25224+10',2,' Some text....','News from user: FN 3 LN 3'),
                                                                                         (3,'2024-07-02 14:07:48.259557+10','2024-07-02 14:07:48.260487+10',3,' Some text....','News from user: FN 3 LN 3'),
                                                                                         (1,'2024-07-02 14:07:48.267681+10','2024-07-02 14:07:48.268569+10',4,' Some text....','News from user: FN 4 LN 4'),
                                                                                         (1,'2024-07-02 14:07:48.275523+10','2024-07-02 14:07:48.276379+10',4,' Some text....','News from user: FN 4 LN 4'),
@@ -57,6 +57,6 @@ INSERT INTO news_schema.news (category_id,created_at,updated_at,user_id,body,tit
                                                                                         (3,'2024-07-02 14:07:48.461988+10','2024-07-02 14:07:48.464698+10',10,' Some text....','News from user: FN 10 LN 10');
 
 INSERT INTO news_schema."comments" (created_at,news_id,updated_at,user_id,body) VALUES
-                                                                                    ('2024-07-02 14:07:48.487348+10',7,'2024-07-02 14:07:48.48736+10',4,' Some comment from user2 to news 7'),
-                                                                                    ('2024-07-02 14:07:48.498246+10',1,'2024-07-02 14:07:48.498255+10',6,' Some comment from user 6 to news 1'),
-                                                                                    ('2024-07-02 14:07:48.507277+10',20,'2024-07-02 14:07:48.507286+10',9,' Some comment from user 9 to news 20');
+                                                                                    ('2024-07-02 14:07:48.487348+10',7,'2024-07-02 14:07:48.48736+10',1,' Some comment from user1 to news 7'),
+                                                                                    ('2024-07-02 14:07:48.498246+10',1,'2024-07-02 14:07:48.498255+10',2,' Some comment from user 2 to news 1'),
+                                                                                    ('2024-07-02 14:07:48.507277+10',20,'2024-07-02 14:07:48.507286+10',3,' Some comment from user 3 to news 20');
