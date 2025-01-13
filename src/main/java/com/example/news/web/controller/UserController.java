@@ -1,10 +1,6 @@
 package com.example.news.web.controller;
 
-import com.example.news.aop.AuthorCheck;
-import com.example.news.aop.Loggable;
 import com.example.news.aop.SecurityCheck;
-import com.example.news.exception.EntityNotFoundException;
-import com.example.news.mapper.v1.UserMapper;
 import com.example.news.mapper.v2.UserMapperV2;
 import com.example.news.model.Role;
 import com.example.news.model.RoleType;
@@ -13,7 +9,6 @@ import com.example.news.web.model.PageFilter;
 import com.example.news.web.model.UserRequest;
 import com.example.news.web.model.UserResponse;
 import jakarta.validation.Valid;
-import jakarta.websocket.server.PathParam;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -22,8 +17,6 @@ import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 

@@ -76,12 +76,12 @@ public class NewsCategoryControllerTest extends AbstractControllerTest {
                         .content("{\"name\": \"Game\"}"))
                 .andExpect(status().isForbidden());
 
-        mockMvc.perform(put("/api/newscategory/3")
+        mockMvc.perform(put("/api/newscategory/2")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content("{\"name\": \"Games\"}"))
                 .andExpect(status().isForbidden());
 
-        mockMvc.perform(delete("/api/newscategory/3"))
+        mockMvc.perform(delete("/api/newscategory/2"))
                 .andExpect(status().isForbidden());
     }
 

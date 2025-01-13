@@ -42,9 +42,9 @@ public class SecurityConfiguration {
         http.authorizeHttpRequests((auth) -> auth
                         .requestMatchers("/api/user/**").hasAnyRole("USER", "ADMIN", "MODERATOR")
                         .requestMatchers("/api/user/admin/**").hasAnyRole("ADMIN")
-                        .requestMatchers("/api/news/**").permitAll()
+                        .requestMatchers("/api/news/**").hasAnyRole("USER", "ADMIN", "MODERATOR")
                         .requestMatchers("/api/newscategory/**").hasAnyRole("USER", "ADMIN", "MODERATOR")
-                        .requestMatchers("/api/comment/**").permitAll()
+                        .requestMatchers("/api/comment/**").hasAnyRole("USER", "ADMIN", "MODERATOR")
                         .anyRequest().authenticated())
                 .csrf(AbstractHttpConfigurer::disable)
                 .httpBasic(Customizer.withDefaults())

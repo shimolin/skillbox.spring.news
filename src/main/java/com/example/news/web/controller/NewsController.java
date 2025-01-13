@@ -3,7 +3,6 @@ package com.example.news.web.controller;
 import com.example.news.aop.AuthorCheck;
 import com.example.news.aop.SecurityCheck;
 import com.example.news.mapper.v2.NewsMapperV2;
-import com.example.news.service.CommentService;
 import com.example.news.service.NewsService;
 import com.example.news.web.model.*;
 import jakarta.validation.Valid;
@@ -23,7 +22,6 @@ import java.util.stream.Collectors;
 @RequiredArgsConstructor
 public class NewsController {
     private final NewsService newsService;
-    private final CommentService commentService;
     private final NewsMapperV2 newsMapper;
 
     @GetMapping("/filter")

@@ -74,7 +74,6 @@ public class NewsServiceImpl implements NewsService {
     }
 
     @Override
-    @AuthorCheck
     public News update(News news) {
         News existedNews = findById(news.getId());
         if(news.getTitle() != null) existedNews.setTitle(news.getTitle());
@@ -85,7 +84,6 @@ public class NewsServiceImpl implements NewsService {
     }
 
     @Override
-    @AuthorCheck
     public void deleteById(Long id) {
         newsRepository.deleteById(id);
     }

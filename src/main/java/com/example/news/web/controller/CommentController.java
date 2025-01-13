@@ -2,7 +2,6 @@ package com.example.news.web.controller;
 
 import com.example.news.aop.AuthorCheck;
 import com.example.news.aop.SecurityCheck;
-import com.example.news.mapper.v1.CommentMapper;
 import com.example.news.mapper.v2.CommentMapperV2;
 import com.example.news.service.CommentService;
 import com.example.news.web.model.CommentFilter;
@@ -26,26 +25,27 @@ public class CommentController {
     private final CommentService commentService;
     private final CommentMapperV2 commentMapper;
 
-//    @GetMapping
-//    public ResponseEntity<List<CommentResponse>> findAll() {
-//        return ResponseEntity.ok(
-//                commentService.findAll().stream()
-//                        .map(commentMapper::commentToResponse)
-//                        .collect(Collectors.toList()));
-//    }
-//
-//    @GetMapping("/{id}")
-//    public ResponseEntity<CommentResponse> findById(@PathVariable Long id) {
-//        return ResponseEntity.ok(
-//                commentMapper.commentToResponse(
-//                        commentService.findById(id)
-//                )
-//        );
-//    }
-
-    @GetMapping()
+    @GetMapping
     @PreAuthorize("hasAnyAuthority('ROLE_ADMIN', 'ROLE_USER', 'ROLE_MODERATOR')")
+    public ResponseEntity<List<CommentResponse>> findAll() {
+        return ResponseEntity.ok(
+                commentService.findAll().stream()
+                        .map(commentMapper::commentToResponse)
+                        .collect(Collectors.toList()));
+    }
 
+    @GetMapping("/{id}")
+    @PreAuthorize("hasAnyAuthority('ROLE_ADMIN', 'ROLE_USER', 'ROLE_MODERATOR')")
+    public ResponseEntity<CommentResponse> findById(@PathVariable Long id) {
+        return ResponseEntity.ok(
+                commentMapper.commentToResponse(
+                        commentService.findById(id)
+                )
+        );
+    }
+
+    @GetMapping("/filter")
+    @PreAuthorize("hasAnyAuthority('ROLE_ADMIN', 'ROLE_USER', 'ROLE_MODERATOR')")
     public ResponseEntity<List<CommentResponse>> findByNewsId(CommentFilter filter){
         return ResponseEntity.ok(commentService.findByNewsId(filter)
                 .stream()

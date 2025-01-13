@@ -25,7 +25,6 @@ public class UserServiceImpl implements UserService {
     private final RoleRepository roleRepository;
 
     @Override
-    @AuthorCheck
     public List<User> findAll(PageFilter filter) {
         if (filter.getPageSize() == null) filter.setPageSize(1000);
         if (filter.getPageNumber() == null) filter.setPageNumber(0);

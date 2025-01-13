@@ -35,6 +35,19 @@ public class UserControllerTest extends AbstractControllerTest {
                                 "}"))
                 .andExpect(status().isCreated());
 
+        mockMvc.perform(post("/api/user/admin")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content("{\n" +
+                                "    \"username\": \"ggg\",\n" +
+                                "    \"password\": \"777\",\n" +
+                                "    \"firstName\": \"asdf\",\n" +
+                                "    \"lastName\": \"vcxbxc\",\n" +
+                                "    \"birthday\": \"2000-01-01\"\n" +
+                                "}")
+                        .param("roleType", "ROLE_MODERATOR"))
+                .andExpect(status().isCreated());
+
+
         mockMvc.perform(put("/api/user/6")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content("{\"firstName\": \"bbbb\"}"))
@@ -69,12 +82,24 @@ public class UserControllerTest extends AbstractControllerTest {
                                 "}"))
                 .andExpect(status().isCreated());
 
+        mockMvc.perform(post("/api/user/admin")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content("{\n" +
+                                "    \"username\": \"ggg\",\n" +
+                                "    \"password\": \"777\",\n" +
+                                "    \"firstName\": \"asdf\",\n" +
+                                "    \"lastName\": \"vcxbxc\",\n" +
+                                "    \"birthday\": \"2000-01-01\"\n" +
+                                "}")
+                        .param("roleType", "ROLE_MODERATOR"))
+                .andExpect(status().isForbidden());
+
         mockMvc.perform(put("/api/user/6")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content("{\"firstName\": \"bbbb\"}"))
                 .andExpect(status().isOk());
 
-        mockMvc.perform(delete("/api/user/6"))
+        mockMvc.perform(delete("/api/user/7"))
                 .andExpect(status().isOk());
     }
 
@@ -102,6 +127,18 @@ public class UserControllerTest extends AbstractControllerTest {
                                 "    \"birthday\": \"2000-01-01\"\n" +
                                 "}"))
                 .andExpect(status().isCreated());
+
+        mockMvc.perform(post("/api/user/admin")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content("{\n" +
+                                "    \"username\": \"ggg\",\n" +
+                                "    \"password\": \"777\",\n" +
+                                "    \"firstName\": \"asdf\",\n" +
+                                "    \"lastName\": \"vcxbxc\",\n" +
+                                "    \"birthday\": \"2000-01-01\"\n" +
+                                "}")
+                        .param("roleType", "ROLE_MODERATOR"))
+                .andExpect(status().isForbidden());
 
         mockMvc.perform(put("/api/user/3")
                         .contentType(MediaType.APPLICATION_JSON)

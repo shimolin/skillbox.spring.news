@@ -26,12 +26,6 @@ public class ExceptionHandlerController {
                 .body(new ErrorResponse(ex.getLocalizedMessage()));
     }
 
-    @ExceptionHandler(NotPermitException.class)
-    public ResponseEntity<ErrorResponse> notPermit(NotPermitException ex){
-        log.error("Error. Not Permitted exception", ex);
-        return ResponseEntity.status(HttpStatus.UNAUTHORIZED)
-                .body(new ErrorResponse(ex.getLocalizedMessage()));
-    }
     @ExceptionHandler(ForbiddenException.class)
     public ResponseEntity<ErrorResponse> forbidden(ForbiddenException ex){
         log.error("Error. Forbidden exception", ex);

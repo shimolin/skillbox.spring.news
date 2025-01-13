@@ -16,19 +16,17 @@ public class CommentControllerTest extends AbstractControllerTest{
             value = "ivanov", setupBefore = TestExecutionEvent.TEST_EXECUTION)
     public void testUserWithROLE_ADMIN() throws Exception {
 
-//        mockMvc.perform(get("/api/comment"))
-//                .andExpect(status().isOk())
-//                .andReturn()
-//                .getResponse()
-//                .getContentAsString();
-//
-//        String res = mockMvc.perform(get("/api/comment/6"))
-//                .andExpect(status().isOk())
-//                .andReturn()
-//                .getResponse()
-//                .getContentAsString();
-//
-//        System.out.println(res);
+        mockMvc.perform(get("/api/comment"))
+                .andExpect(status().isOk())
+                .andReturn()
+                .getResponse()
+                .getContentAsString();
+
+        mockMvc.perform(get("/api/comment/2"))
+                .andExpect(status().isOk())
+                .andReturn()
+                .getResponse()
+                .getContentAsString();
 
         mockMvc.perform(post("/api/comment")
                         .contentType(MediaType.APPLICATION_JSON)
@@ -64,19 +62,17 @@ public class CommentControllerTest extends AbstractControllerTest{
             value = "petrov", setupBefore = TestExecutionEvent.TEST_EXECUTION)
     public void testUserWithROLE_MODERATOR() throws Exception {
 
-//        mockMvc.perform(get("/api/comment"))
-//                .andExpect(status().isOk())
-//                .andReturn()
-//                .getResponse()
-//                .getContentAsString();
-//
-//        String res = mockMvc.perform(get("/api/comment/6"))
-//                .andExpect(status().isOk())
-//                .andReturn()
-//                .getResponse()
-//                .getContentAsString();
-//
-//        System.out.println(res);
+        mockMvc.perform(get("/api/comment"))
+                .andExpect(status().isOk())
+                .andReturn()
+                .getResponse()
+                .getContentAsString();
+
+        mockMvc.perform(get("/api/comment/2"))
+                .andExpect(status().isOk())
+                .andReturn()
+                .getResponse()
+                .getContentAsString();
 
         mockMvc.perform(post("/api/comment")
                         .contentType(MediaType.APPLICATION_JSON)
@@ -112,19 +108,17 @@ public class CommentControllerTest extends AbstractControllerTest{
             value = "sidorov", setupBefore = TestExecutionEvent.TEST_EXECUTION)
     public void testUserWithROLE_USER() throws Exception {
 
-//        mockMvc.perform(get("/api/comment"))
-//                .andExpect(status().isOk())
-//                .andReturn()
-//                .getResponse()
-//                .getContentAsString();
-//
-//        String res = mockMvc.perform(get("/api/comment/6"))
-//                .andExpect(status().isOk())
-//                .andReturn()
-//                .getResponse()
-//                .getContentAsString();
-//
-//        System.out.println(res);
+        mockMvc.perform(get("/api/comment"))
+                .andExpect(status().isOk())
+                .andReturn()
+                .getResponse()
+                .getContentAsString();
+
+        mockMvc.perform(get("/api/comment/2"))
+                .andExpect(status().isOk())
+                .andReturn()
+                .getResponse()
+                .getContentAsString();
 
         mockMvc.perform(post("/api/comment")
                         .contentType(MediaType.APPLICATION_JSON)
